@@ -6,16 +6,13 @@ import img5 from '../assets/images/product images/mockNeck.png'
 import img6 from '../assets/images/product images/cottonTee.png'
 import { MdKeyboardArrowDown } from "react-icons/md";
 import {useState} from 'react';
+import {type CategoryFilterState} from '../types/categoryFilterState'
 
 interface Item{
     img:string,
     name:string,
     price:number,
     color:string,
-}
-interface CategoryState{
-    id:number,
-    val:string
 }
 
 const items:Item[]=[
@@ -61,9 +58,9 @@ const sizes=["XS","S","M","L","XL"];
 const buttonsColors=["#000000","#FFFFFF","#E5E2E1","#747878","#1C1B1B"];
 
 export default function Collection() {
-    const [categoryFilter,setCategoryFilter]=useState<CategoryState>({id:-1,val:""});
-    const [sizeFilter,setSizeFilter]=useState<CategoryState>({id:-1,val:""});
-    const [colorFilter,setColorFilter]=useState<CategoryState>({id:-1,val:""});
+    const [categoryFilter,setCategoryFilter]=useState<CategoryFilterState>({id:-1,val:""});
+    const [sizeFilter,setSizeFilter]=useState<CategoryFilterState>({id:-1,val:""});
+    const [colorFilter,setColorFilter]=useState<CategoryFilterState>({id:-1,val:""});
     return (
     <main>
         <section className="collection">
@@ -77,7 +74,7 @@ export default function Collection() {
                 </div>
                 <div className="filterSection sizeFilter">
                     <span className="sectionName">SIZE</span>
-                    <div>
+                    <div className="sizesContainer">
                         {sizes.map((el,id)=>(<button onClick={()=>setSizeFilter({id,val:el})} key={id} className={sizeFilter.id==id?'active':''}>{el}</button>))}
                     </div>
                 </div>
@@ -95,6 +92,7 @@ export default function Collection() {
                     </div>
                     <div className="productsHolder">
                         {items.map((el,id)=>(
+
                             <div className="item" key={id}>
                                 <img src={el.img} alt="Item Image" />
                                 <div className="description">

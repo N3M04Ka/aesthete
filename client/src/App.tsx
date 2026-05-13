@@ -4,6 +4,9 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import NewArrivals from './pages/NewArrivals';
 import Collection from './pages/Collections';
+import ItemPage from './pages/ItemPage'
+import CheckOut from './pages/CheckOut'
+
 function App() {
 
   return (
@@ -11,9 +14,13 @@ function App() {
         <BrowserRouter>
             <Header/>
             <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/new-arrivals" element={<NewArrivals/>}/>
-                <Route path="/collection" element={<Collection/>}/>
+                <Route index element={<Home/>}/>
+                <Route path="new-arrivals" element={<NewArrivals/>}/>
+                <Route path="collection">
+                    <Route index element={<Collection/>}/>
+                    <Route path=":id" element={<ItemPage/>}/>
+                </Route>
+                <Route path="checkout" element={<CheckOut/>}/>
             </Routes>
             <Footer/>
         </BrowserRouter>
