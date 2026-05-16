@@ -43,13 +43,13 @@ export default function Header() {
                         </button>
                     </div>
                     <div className="action">
-                        <button className="userBtn">
+                        <Link to="user/personal-info" className="userBtn">
                             <FaRegUser />
-                        </button>
+                        </Link>
                     </div>
                     <div className="action">
                         <Link
-                            to="/user-shopping-bag"
+                            to="/shopping-bag"
                             className="shoppingBagLink"
                         >
                             <MdOutlineShoppingBag />

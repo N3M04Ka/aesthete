@@ -10,8 +10,13 @@
 }
 a{
     text-decoration:none;
-    &.navLink.active{
+    color:#444748;
+    width:fit-content;
+    font-weight:600;
+    &.active{
         color:#1C1B1B;
+        /* color:red; */
+        border-bottom: 1px solid #1C1B1B;
     }
 }
 input:focus{
@@ -65,12 +70,7 @@ header{
             display: flex;
             gap:1rem;
             a{
-                color:#444748;
                 font-size: 1.4rem;
-                font-weight:600;
-                &.navLink.active{
-                    border-bottom: 1px solid #1C1B1B;
-                }
             }
         }
         .centerLink{
@@ -480,8 +480,6 @@ header{
                     /* width: 14rem; */
                     overflow-y:auto;
                     max-width: 20rem;
-                    /* background-color: red; */
-                    /* align-items: center; */
                     scroll-behavior: smooth;
                     &::-webkit-scrollbar{
                         display: none;
@@ -614,12 +612,34 @@ header{
         }
     }
 }
+.nameInput{
+    display: flex;
+    flex-direction: column;
+    flex:1 1 0;
+    label{
+        font-size: 1.2rem;
+        color:#444748;
+        font-weight: 600;
+    }
+    input{
+        border:none;
+        color:#6B7280;
+        font-size: 1.6rem;
+        padding:1.2rem;
+    }
+}
 .checkOutPage{
     .container{
         display: flex;
         justify-content: space-between;
         gap:4rem;
         padding-block:8rem;
+    }
+    h3{
+        font-size: 2rem;
+        font-family: "Hanken Grotesk", sans-serif;
+        color:#1C1B1B;
+        font-weight: 500;
     }
     .paymentDetails{
         display: flex;
@@ -631,28 +651,6 @@ header{
             font-size: 3.2rem;
             color:#1C1B1B;
             font-weight: 400;
-        }
-        h3{
-            font-size: 2rem;
-            font-family: "Hanken Grotesk", sans-serif;
-            color:#1C1B1B;
-            font-weight: 500;
-        }
-        .nameInput{
-            display: flex;
-            flex-direction: column;
-            flex:1 1 0;
-            label{
-                font-size: 1.2rem;
-                color:#444748;
-                font-weight: 600;
-            }
-            input{
-                border:none;
-                color:#6B7280;
-                font-size: 1.6rem;
-                padding:1.2rem;
-            }
         }
         .contactContainer{
             /* margin-block: 4rem; */
@@ -669,6 +667,7 @@ header{
                 label{
                     color:#444748;
                     font-size: 1.6rem;;
+                    cursor: pointer;
                 }
             }
         }
@@ -728,63 +727,377 @@ header{
         }
     }
     .purchaseDetails{
-        width: 45rem;
+        width: 37rem;
         border-left:2px solid #C4C7C880;
         padding-left:2.4rem;
-        h2{
-
-        }
+        box-sizing: border-box;
+        /* background-color: red; */
+        display: flex;
+        flex-direction: column;
+        gap:1.6rem;
         .items{
+            display: flex;
+            flex-direction: column;
+            gap:1.6rem;
             .item{
+                display: flex;
+                gap:1.6rem;
+                /* align-items: fl; */
                 .imgContainer{
+                    position:relative;
                     img{
-
+                        height: 9.6rem;
                     }
                     span{
-
+                        position:absolute;
+                        color:#FCF9F8;
+                        font-size: 1rem;
+                        background-color: #1C1B1B;
+                        /* text-align: center; */
+                        display: inline-grid;
+                        align-items: center;
+                        justify-content: center;
+                        /* align-items: center; */
+                        /* vertical-align:baseline; */
+                        border-radius: 50%;
+                        width: 2rem;
+                        height: 2rem;
+                        right:-0.5rem;
+                        top:-rem;
                     }
                 }
+                span{
+                    color:#1C1B1B;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                }
                 .textInfo{
-                    .left{
-                        .name{
-
-                        }
-                        div{
-                            span{
-
-                            }
-                        }
-                    }
-                    .price{
-
+                    display: flex;
+                    flex-direction: column;
+                    gap:0.5rem;
+                    .colorAndSize{
+                        font-weight: 500;
+                        color:#444748;
+                        font-size: 1.4rem;
+                        /* margin-top:1rem; */
                     }
                 }
             }
         }
         .discountPart{
+            display: flex;
+            gap:1.6rem;
+            padding-block:2.4rem;
             input{
+                padding:1rem 1.2rem;
+                color:#6B7280;
+                font-size: 1.6rem;
+                border:none;
 
             }
             button{
-
+                background-color: transparent;
+                color:#1C1B1B;
+                font-size: 1.2rem;
+                font-weight: 600;
+                border:1px solid #1C1B1B;
+                padding:1.2rem 2.4rem;
             }
         }
         .finalPayment{
+            border-top:2px solid #C4C7C8;
+            padding-top:1.6rem;
+            display: flex;
+            flex-direction: column;
+            gap:1.6rem;
             div{
+                display: flex;
+                justify-content: space-between;
                 .label{
-
+                    font-size: 1.6rem;
+                    color:#444748;
                 }
                 .value{
-
+                    font-size: 1.6rem;
+                    color:#1C1B1B
                 }
             }
         }
         .totalPayment{
+            border-top:2px solid #C4C7C8;
+            display: flex;
+            justify-content: space-between;
+            padding-top:1.6rem;
             .total{
-
+                color:#1C1B1B;
+                font-size: 2rem;
+                font-family: "Hanken Grotesk",sans-serif;
             }
             .price{
+                display: flex;
+                gap:0.5rem;
+                align-items: center;
+                .currency{
+                    color:#444748;
+                    font-size: 1.6rem;
+                }
+                .value{
+                    color:#1C1B1B;
+                    font-size: 3.2rem;
+                    font-family: "Hanken Grotesk", sans-serif;
+                }
+            }
+        }
+    }
+}
+.sideBar{
+    border-right:2px solid #C4C7C8;
+    display: flex;
+    flex-direction: column;
+    gap:1.6rem;
+    width:26rem;
+    h2{
+        font-family: "Hanken Grotesk",sans-serif;
+        color:#1C1B1B;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+    .links{
+        display: flex;
+        flex-direction: column;
+        gap:1.6rem;
+        a{
+            font-size: 1.2rem;
+            color:#444748;
+        }
+    }
+}
+.accountInfo{
+    .container{
+        padding-block:8rem;
+        display: flex;
+        gap:2.4rem;
+        .mainContent{
+            width:min(90%,77rem);
+            flex-grow:1;
+            h1{
+                font-size: 3.2rem;
+                color:#1C1B1B;
+                font-family: "Hanken Grotesk", sasn-serif;
+                margin-bottom:1rem;
+                font-weight: 400;
+            }
+            p{
+                color:#444748;
+                font-size: 1.6rem;
+                margin-bottom: 4rem;
+            }
+            .topCards{
+                display: flex;
+                gap:2.4rem;
+            }
+            .card{
+                background-color: white;
+                border:2px solid #C4C7C8;
+                padding:2.4rem;
+                flex-grow:1;
+                gap:1.6rem;
+                display: flex;
+                flex-direction: column;
+                .top{
+                    display: flex;
+                    justify-content: space-between;
+                    span{
+                        color:#444748;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                    }
+                    button{
+                        color:#1C1B1B;
+                        font-weight: 600;
+                        font-weight: 1.2rem;
+                        border-bottom: 1px solid #1C1B1B;;
+                    }
+                }
+                >span{
+                    font-size: 1.6rem;
+                    color:#444748;
+                    width: fit-content;
+                    &:nth-child(2){
+                        color:#1C1B1B;
+                    }
+                    &.default{
+                        color:#1C1B1B;
+                        padding:0.4rem 1.2rem;
+                        background-color: #EBE7E7;
+                        font-weight: 600;
+                    }
+                }
+                &.bottom{
+                    margin-top: 2.4rem;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    .left{
+                        display: flex;
+                        flex-direction: column;
+                        gap:1rem;
+                        span{
+                            font-size: 1.2rem;
+                            color:#444748;
+                            font-weight: 600;
 
+                        }
+                    }
+                    button{
+                        padding:1.2rem 3rem;
+                        border:2px solid #1C1B1B;
+                        color:#1C1B1B;
+                        font-weight: 700;
+                        font-size: 1.2rem;
+                        height: fit-content;
+                    }
+                }
+            }
+        }
+    }
+}
+.orderHistory{
+    .container{
+        padding-block:8rem;
+        display: flex;
+        gap:8rem;
+        .content{
+            flex-grow:1;
+            .top{
+                border-bottom: 1px solid #C4C7C8;
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: 4px;
+                align-items: flex-end;
+                h1{
+                    font-size: 2rem;
+                    color:#1C1B1B;
+                    font-family: "Hanken Grotesk",sans-serif;
+                    font-weight: 400;
+                }
+                span{
+                    font-size: 1.2rem;
+                    color:#444748;
+                    font-weight: 600;
+                }
+            }
+            .orders{
+                .order{
+                    border-bottom: 1px solid #C4C7C8;
+                    padding-block:4rem;
+                    .header{
+                        display: flex;
+                        justify-content: space-between;
+                        .orderDetails{
+                            display: flex;
+                            flex-direction: column;
+                            .orderNumber{
+                                color:#444748;
+                                font-size: 1.2rem;
+                                font-weight: 600;
+                            }
+                            .orderDate{
+                                font-size: 1.6rem;
+                                color:#1C1B1B;
+                            }
+                        }
+                        .otherInfo{
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-end;
+                            gap:5px;
+                            span{
+                                color:#1C1B1B;
+                                font-size: 1.2rem;
+                                font-weight: 600;
+                                width: fit-content;
+                            }
+                            .status{
+                                padding:4px 8px;
+                                background-color: #E5E2E1;
+                            }
+                            .price{
+                                &.canceled{
+                                    text-decoration: line-through;
+                                }
+                            }
+                        }
+                    }
+                    .body{
+                        .imgs{
+                            margin-block:1.6rem;
+                            display: flex;
+                            gap:2.4rem;
+                            img{
+                                height: 13rem;
+                            }
+                        }
+                        button{
+                            color:#1C1B1B;
+                            font-size: 1.2rem;
+                            font-weight: 600;
+                            border-bottom:1px solid #1C1B1B;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.signOut{
+    padding-top:5rem;
+    padding-bottom: 12.8rem;
+    .container{
+        .content{
+            padding-block:8rem;
+            padding-inline:4rem;
+            border:1px solid #C4C7C8;
+            width: 48rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* flex-grow: 1; */
+            h1{
+                font-size: 6.4rem;
+                color:#1C1B1B;
+                font-weight: 300;
+                font-family: "Hanken Grotesk",sans-serif;
+                margin-bottom: 1rem;
+            }
+            p{
+                font-size: 1.6rem;
+                color:#444748;
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+            .buttons{
+                align-self: stretch;
+                /* flex-grow: 1; */
+                /* width: 100%; */
+                display: flex;
+                flex-direction: column;
+                gap:1.6rem;
+                button{
+                    /* flex-grow: 1; */
+                    border:1px solid #121212;
+                    padding-block:1.6rem;
+                    color:#1C1B1B;
+                    font-size: 1.2rem;
+                    letter-spacing: 1px;
+                    font-weight: 500;
+                    &:first-child{
+                        background-color: #121212;
+                        color:white;
+                    }
+                }
             }
         }
     }
@@ -821,6 +1134,7 @@ footer{
             font-family: "Hanken Grotesk",sans-serif;
             font-size: 1.6rem;
             color:#444748;
+            font-weight: normal;
         }
         >span{
             font-size: clamp(1.2rem,calc(0.5rem + 2.5vw),1.6rem);

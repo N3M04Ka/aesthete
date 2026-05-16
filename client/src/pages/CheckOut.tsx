@@ -1,12 +1,7 @@
 import { MdLockOutline } from "react-icons/md"
-import {useId} from 'react'
 import img1 from '../assets/images/checkoutImg1.png'
 import img2 from '../assets/images/checkoutImg2.png'
-
-interface props{
-    label:string,
-    placeholder:string,
-}
+import NameInput from '../components/NameInput'
 interface Item{
     img:string,
     count:number,
@@ -35,14 +30,11 @@ const checkoutItems:Item[]=[
     },
 ]
 
-function NameInput({label,placeholder}:props){
-    const inputId=useId();
-    return(
-        <div className="nameInput">
-            <label htmlFor={inputId}>{label}</label>
-            <input type="text" name="nameInput" id={inputId} placeholder={placeholder}/>
-        </div>
-    )
+function getFullPrice():number{
+    let res=0;
+    for(let item of checkoutItems)
+        res+=item.count*item.price;
+    return res;
 }
 export default function CheckOut() {
 
@@ -54,7 +46,7 @@ export default function CheckOut() {
                         <h2>Checkout</h2>
                         <div className="contactContainer">
                             <h3>Contact</h3>
-                            <NameInput label="Email" placeholder="Enter your email address"/>
+                            <NameInput label="Email" placeholder="Enter your email address" isDisabled={false} type="string"/>
                             {/* <input type="text" /> */}
                             <div className="checkBoxContainer">
                                 <input type="checkbox" name="checkBox" id="checkBox" />
@@ -64,18 +56,18 @@ export default function CheckOut() {
                         <div className="shippingDelivery">
                             <h3>Shipping Delivery</h3>
                             <div className="fullName">
-                                <NameInput label="First Name" placeholder=""/>
-                                <NameInput label="Last Name" placeholder=""/>
+                                <NameInput label="First Name" placeholder="" isDisabled={false} type="string"/>
+                                <NameInput label="Last Name" placeholder="" isDisabled={false} type="string"/>
                             </div>
                             <div>
-                                <NameInput label="Address" placeholder=""/>
+                                <NameInput label="Address" placeholder="" isDisabled={false} type="string"/>
                             </div>
                             <div>
-                                <NameInput label="Apartment, suit, etc. (optional)" placeholder=""/>
+                                <NameInput label="Apartment, suit, etc. (optional)" placeholder="" isDisabled={false} type="string"/>
                             </div>
                             <div>
-                                <NameInput label="City" placeholder=""/>
-                                <NameInput label="Postal Code" placeholder=""/>
+                                <NameInput label="City" placeholder="" isDisabled={false} type="string"/>
+                                <NameInput label="Postal Code" placeholder="" isDisabled={false} type="string"/>
                             </div>
                             <select name="countrySelect" id="countrySelect">
                                 <option value="United Stated">United Stated</option>
@@ -88,12 +80,12 @@ export default function CheckOut() {
                             <h3>Payment</h3>
                             <span>All transactions are secure and encrypted.</span>
                             <div className="cardDetails">
-                                <NameInput label="Card Number" placeholder="0000 0000 0000 0000"/>
+                                <NameInput label="Card Number" placeholder="0000 0000 0000 0000" isDisabled={false} type="string"/>
                                 <div className="cardSpecificDetails">
-                                    <NameInput label="Expiration Date (MM/YY)" placeholder="MM/YY"/>
-                                    <NameInput label="Security Code" placeholder="CVC"/>
+                                    <NameInput label="Expiration Date (MM/YY)" placeholder="MM/YY" isDisabled={false} type="string"/>
+                                    <NameInput label="Security Code" placeholder="CVC" isDisabled={false} type="string"/>
                                 </div>
-                                <NameInput label="Name on Card" placeholder=""/>
+                                <NameInput label="Name on Card" placeholder="" isDisabled={false} type="string"/>
                             </div>
                         </div>
                         <div className="payButton">
@@ -105,7 +97,7 @@ export default function CheckOut() {
                         </div>
                     </div>
                     <div className="purchaseDetails">
-                        <h2>Order Summary</h2>
+                        <h3>Order Summary</h3>
                         <div className="items">
                             {checkoutItems.map((el,id)=>(
                                 <div className="item" key={id}>
@@ -114,36 +106,37 @@ export default function CheckOut() {
                                     <span>{el.count}</span>
                                     </div>
                                     <div className="textInfo">
-                                        <div className="left">
-                                            <span className="name">{el.name}</span>
-                                            <div><span>{el.color}/{el.size}</span></div>
-                                        </div>
-                                        <span className="price">{(el.price*el.count).toFixed(2)}</span>
+                                        <span className="name">{el.name}</span>
+                                        <div><span className="colorAndSize">{el.color} / {el.size}</span></div>
                                     </div>
+                                    <span className="price">${(el.price*el.count).toFixed(2)}</span>
                                 </div>
                             ))}
                         </div>
                         <div className="discountPart">
-                            <input type="text" />
+                            <input type="text" placeholder="Discount code or gift card" />
                             <button>Apply</button>
                         </div>
                         <div className="finalPayment">
                             <div>
                                 <span className="label">Subtotal</span>
-                                <span className="value"></span>
+                                <span className="value">${getFullPrice().toFixed(2)}</span>
                             </div>
                             <div>
                                 <span className="label">Shipping</span>
-                                <span className="value"></span>
+                                <span className="value">Calculated on the next step</span>
                             </div>
                             <div>
                                 <span className="label">Taxes</span>
-                                <span className="value"></span>
+                                <span className="value">${(getFullPrice()*0.2).toFixed(2)}</span>
                             </div>
                         </div>
                         <div className="totalPayment">
                             <span className="total">Total</span>
-                            <span className="price"></span>
+                            <div className="price">
+                                <span className="currency">USD</span>
+                                <div className="value">${(getFullPrice()*1.2).toFixed(2)}</div>
+                            </div>
                         </div>
                     </div>
                 </div>

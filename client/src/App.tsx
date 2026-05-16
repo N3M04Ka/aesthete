@@ -6,7 +6,10 @@ import NewArrivals from './pages/NewArrivals';
 import Collection from './pages/Collections';
 import ItemPage from './pages/ItemPage'
 import CheckOut from './pages/CheckOut'
-
+import AccountInfo from './pages/AccountInfo'
+import ShoppingBag from './pages/ShoppingBag';
+import Orderhistory from './pages/OrderHistory';
+import SignOut from './pages/SignOut';
 function App() {
 
   return (
@@ -20,6 +23,12 @@ function App() {
                     <Route index element={<Collection/>}/>
                     <Route path=":id" element={<ItemPage/>}/>
                 </Route>
+                <Route path="user">
+                    <Route path="personal-info" element={<AccountInfo/>}/>
+                    <Route path="order-history" element={<Orderhistory/>}/>
+                    <Route path="sign-out" element={<SignOut/>}/>
+                </Route>
+                <Route path="shopping-bag" element={<ShoppingBag/>}/>
                 <Route path="checkout" element={<CheckOut/>}/>
             </Routes>
             <Footer/>
