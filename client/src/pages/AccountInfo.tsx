@@ -20,7 +20,7 @@ export default function AccountInfo() {
                                 <NameInput label="Email" placeholder="alexander.p@gmail.ru" isDisabled={true} type="string"/>
                                 <NameInput label="Phone" placeholder="+1 (555) 123-4567" isDisabled={true} type="string"/>
                             </div>
-                            <div className="card">
+                            <div>
                                 <div className="top">
                                     <span>SHIPPING ADDRESS</span>
                                     <button>Edit</button>
