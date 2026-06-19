@@ -2,6 +2,7 @@
     margin:0;
     padding:0;
     font-family: "Inter", sans-serif;
+    /* outline:1px dashed black; */
 }
 .centered{
     display: flex;
@@ -1068,6 +1069,8 @@ header{
     max-width:26rem;
     flex:1 1 auto;
     padding:1rem;
+    min-width: 15rem;
+    box-sizing: border-box;
     h2{
         font-family: "Hanken Grotesk",sans-serif;
         color:#1C1B1B;
@@ -1077,24 +1080,44 @@ header{
     .links{
         display: flex;
         flex-direction: column;
-        gap:1.6rem;
+        column-gap:1.6rem;
+        row-gap:1rem;
         width:fit-content;
         a{
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             color:#444748;
         }
     }
 }
 .accountInfo{
     .container{
-        padding-block:8rem;
+        padding-block:clamp(3rem,calc(2rem + 5vw),8rem);
         display: flex;
+        flex-wrap: wrap;
         gap:2.4rem;
+        justify-content: center;
+        .sideBar{
+            @media(width<=1016px){
+                border-right: none;
+                /* width: 80%; */
+                max-width: 80%;
+                align-items: center;
+                /* justify-con  tent: center; */
+                h2{
+                    text-align: center;
+                }
+                .links{
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+            }
+        }
         .mainContent{
             width:min(90%,77rem);
             flex-grow:1;
             h1{
-                font-size: 3.2rem;
+                font-size: clamp(2.4rem,calc(1rem + 2vw),3.2rem);
                 color:#1C1B1B;
                 font-family: "Hanken Grotesk", sasn-serif;
                 margin-bottom:1rem;
@@ -1107,6 +1130,8 @@ header{
             }
             .topCards{
                 display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
                 gap:2.4rem;
             }
             .card{
@@ -1117,6 +1142,10 @@ header{
                 gap:1.6rem;
                 display: flex;
                 flex-direction: column;
+                min-width: 30rem;
+                box-sizing: border-box;
+                /* max-width: 80%; */
+                flex:1 1 0;
                 .top{
                     display: flex;
                     justify-content: space-between;
@@ -1143,6 +1172,7 @@ header{
                         color:#1C1B1B;
                         padding:0.4rem 1.2rem;
                         background-color: #EBE7E7;
+                        font-size: 1.5rem;
                         font-weight: 600;
                     }
                 }
@@ -1152,6 +1182,13 @@ header{
                     flex-direction: row;
                     justify-content: space-between;
                     align-items: center;
+                    flex-wrap: wrap;
+                    /* flex-grow: grow; */
+                    /* justify-self: center; */
+                    @media(width<=767px){
+                        /* justify-self: center; */
+                        margin-inline: auto;
+                    }
                     .left{
                         display: flex;
                         flex-direction: column;
@@ -1172,17 +1209,48 @@ header{
                         height: fit-content;
                     }
                 }
+                /* @media(width<=767px){
+                    max-width: 80%;
+                    justify-self: center;
+                     flex-grow: 1;
+                } */
             }
         }
     }
 }
 .orderHistory{
     .container{
-        padding-block:8rem;
+        padding-block:clamp(3rem,calc(2rem + 5vw),8rem);
         display: flex;
-        gap:8rem;
+        gap:clamp(3rem,calc(0.5rem + 6vw),8rem);
+        flex-wrap: wrap;
+        @media(width<537px){
+            flex-wrap: wrap;
+            justify-content: center;
+            .sideBar{
+                border-right: none;
+                max-width: 90%;
+                h2{
+                    text-align: center;
+                }
+                .links{
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    /* width: 100%;; */
+                }
+            }
+            /* >*{
+                flex-grow: 0;
+            } */
+
+            .content{
+                max-width: 80%;
+            }
+        }
         .content{
             flex-grow:1;
+            min-width: 28rem;
             .top{
                 border-bottom: 1px solid #C4C7C8;
                 display: flex;
@@ -1247,7 +1315,7 @@ header{
                         .imgs{
                             margin-block:1.6rem;
                             display: flex;
-                            gap:2.4rem;
+                            gap:1.5rem;
                             img{
                                 height: 13rem;
                             }
@@ -1321,19 +1389,25 @@ header{
         display: flex;
         gap:clamp(2rem,calc(1rem + 4vw),8rem);
         flex-wrap: wrap;
-        justify-content: center;
-        .sideBar{
-            @media(width<=450px){
+        /* justify-content: space-between; */
+        @media(width<=742px){
+            justify-content: center;
+            .sideBar{
+                max-width: 90%;
                 border-right: none;
+                align-items: center;
+                h2{
+                    text-align: center;
+                }
                 .links{
                     flex-direction: row;
                     flex-wrap: wrap;
+                    justify-content: center;
                 }
             }
         }
         .mainContent{
-            width: 60rem;
-            max-width: 65%;
+            width:min(60rem,70%);
             display: flex;
             flex-direction: column;
             gap:clamp(2rem,calc(2rem + 3vw),8rem);
@@ -1378,7 +1452,8 @@ header{
                 input{
                     font-size: 1.6rem;
                     color:#1C1B1B;
-                    padding:1rem;
+                    /* padding:1rem; */
+                    padding:clamp(0.8rem,calc(0.3rem + 0.5vw),1.2rem);
                     border:none;
                     background-color: transparent;
                     border-bottom: 2px solid #747878;
@@ -1392,34 +1467,42 @@ header{
                 display: flex;
                 flex-direction: column;
                 gap:1.6rem;
-                .checkBox{
+                .checkBoxHolder{
                     display: flex;
                     align-items: center;
-                    gap:1.2rem;
-                    .checkBoxItself{
-                        /* background-color: red; */
+                    gap:1rem;
+                    .checkBox{
+                        border:1px solid #1C1B1B;
+                        display: inline-block;
+                        width: 2.2rem;
+                        height: 2.2rem;
+                        cursor: pointer;
+                        flex-shrink: 0;
                         input{
                             display: none;
+                            &:checked+span{
+                                display: flex;
+                            }
                         }
-                        .newInput{
-                            width: 2.2rem;
+                        span{
+                            display: inline-block;
                             height: 2.2rem;
-                            border:1px solid #1C1B1B;
-                            &.checked{
-                                background-color: #1C1B1B;
-                            }
+                            width: 2.2rem;
+                            background-color: #1C1B1B;
+                            color:white;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: 1.8rem;
+                            display: none;
                         }
-                        /* &>.newInput:checked +   .newInput{
-                            background-color: transparent;
-                            >*{
-                                display: none;
-                            }
-                        } */
                     }
-                    label{
+                    >span{
+                        /* display: inline-block; */
                         font-size: 1.6rem;
                         color:#1C1B1B;
-                        cursor: pointer;
+                        /* background-color: red; */
+                        display: inline-block;
+                        width: 30rem;
                     }
                 }
             }
@@ -1447,14 +1530,15 @@ header{
 }
 .savedItems{
     .container{
-        padding-block:8rem;
+        padding-block:clamp(3rem,calc(2rem + 5vw),8rem);
         display: flex;
-        gap:8rem;
+        gap:clamp(3rem,calc(0.5rem + 6vw),8rem);
         .mainContent{
-            width: 100%;
-            border-top:2px solid #C4C7C8;
+            /* width:min(60rem,70%); */
+            max-width: 70%;
+            flex-grow: 1;
             h1{
-                font-size: 3.2rem;
+                font-size: clamp(2.4rem,calc(1rem + 2vw),3.2rem);
                 color:#1C1B1B;
                 font-family: "Hanken Grotesk",sans-serif;
                 font-weight: 400;
@@ -1465,17 +1549,23 @@ header{
             }
             .items{
                 padding-top:4rem;
-                display: flex;
-                flex-wrap: wrap;
-                gap:2.5rem;
+                display: grid;
+                /* width:10rem; */
+                grid-template-columns: repeat(auto-fit,minmax(12rem,1fr));
+                gap:1.5rem;
+                border-top:2px solid #C4C7C8;
+                margin-top:2rem;
                 .item{
                     display: flex;
                     flex-direction: column;
-                    gap:1.6rem;
-                    width: 30rem;
+                    gap:clamp(1rem,calc(0.5rem + 2vw),1.6rem);
+                    max-width: 25rem;
                     .name{
                         color:#1C1B1B;
-                        font-size: 1.8rem;
+                        font-size: clamp(1.6rem,calc(0.5rem + 1.2vw),1.8rem);
+                        white-space:nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
                     .price{
                         color:#444748;
@@ -1494,6 +1584,29 @@ header{
                         }
                     }
                 }
+            }
+        }
+        @media(width<=480px){
+            flex-wrap: wrap;
+            justify-content: center;
+            .sideBar{
+                border-right: none;
+                max-width: 90%;
+                h2{
+                    text-align: center;
+                }
+                .links{
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+            }
+            /* >*{
+                flex-grow: 0;
+            } */
+
+            .mainContent{
+                max-width: 100%;
             }
         }
     }

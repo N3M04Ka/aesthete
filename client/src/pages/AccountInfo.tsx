@@ -20,7 +20,7 @@ export default function AccountInfo() {
                                 <NameInput label="Email" placeholder="alexander.p@gmail.ru" isDisabled={true} type="string"/>
                                 <NameInput label="Phone" placeholder="+1 (555) 123-4567" isDisabled={true} type="string"/>
                             </div>
-                            <div>
+                            <div className="card">
                                 <div className="top">
                                     <span>SHIPPING ADDRESS</span>
                                     <button>Edit</button>
@@ -29,7 +29,7 @@ export default function AccountInfo() {
                                 <span>123 Minimalist Avenue</span>
                                 <span>Apt 4B</span>
                                 <span>New York, Ny 10001</span>
-                                <span>United State</span>
+                                <span>United States</span>
                                 <span className="default">Default</span>
                             </div>
                         </div>

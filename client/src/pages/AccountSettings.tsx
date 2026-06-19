@@ -4,6 +4,7 @@ import { IoMdCheckmark} from "react-icons/io";
 
 interface props{
     label:string;
+    name:string;
 }
 
 function PasswordInput({label}:props){
@@ -15,19 +16,15 @@ function PasswordInput({label}:props){
         </div>
     )
 }
-function CheckBoxInput({label}:props){
-    const id=useId();
-    const [checked,setChecked]=useState<boolean>(false);
+function CheckBoxInput({label,name}:props){
+    // const id=useId();
     return (
-        <div className="checkBox">
-            <div className={"checkBoxItself"}>
-                <input type="checkbox" name="check" id={id}  checked={checked} onChange={()=>{
-                    console.log('changed to '+!checked);
-                    setChecked(p=>!p);
-                }}/>
-                <div className={"newInput"+(checked?" checked":"")}><IoMdCheckmark color="ffffff" size={"2.2rem"} /></div>
-            </div>
-            <label htmlFor={id}>{label}</label>
+        <div className="checkBoxHolder">
+            <label className="checkBox">
+                <input type="checkbox" name={name}/>
+                <span><IoMdCheckmark/></span>
+            </label>
+            <span>{label}</span>
         </div>
     )
 }
@@ -42,18 +39,18 @@ export default function AccountSettings() {
                         <div className="changePassword">
                             <h2>Change Password</h2>
                             <form action="" method="POST">
-                                <PasswordInput label="Current Password"/>
-                                <PasswordInput label="New Password"/>
-                                <PasswordInput label="Confirm New Password"/>
+                                <PasswordInput label="Current Password" name="curPassword"/>
+                                <PasswordInput label="New Password" name="newPassword"/>
+                                <PasswordInput label="Confirm New Password" name="newPasswordRepeat"/>
                                 <button type="submit">UPDATE PASSWORD</button>
                             </form>
                         </div>
                         <div className="emailPreferences">
                             <h2>Email Preferences</h2>
                             <form action="" method="POST">
-                                <CheckBoxInput label="AESTHETE Newsletter"/>
-                                <CheckBoxInput label="Order Updates & Tracking"/>
-                                <CheckBoxInput label="Exclusive promotions & Early Access"/>
+                                <CheckBoxInput label="AESTHETE Newsletter" name="AestheteNews"/>
+                                <CheckBoxInput label="Order Updates & Tracking" name="orderUpdateAndTracking"/>
+                                <CheckBoxInput label="Exclusive promotions & Early Access" name="promotionsAndEAccess"/>
                             </form>
                         </div>
                         <div className="dangerZone">
