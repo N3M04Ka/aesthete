@@ -41,7 +41,7 @@ export default function AccountInfo() {
                             <button>Change Password</button>
                         </div>
                     </div>
-                </div>
+                </div>  
             </section>
         </main>
     );

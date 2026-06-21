@@ -827,6 +827,7 @@ header{
     display: flex;
     flex-direction: column;
     flex:1 1 0;
+    min-width: 0;
     label{
         font-size: 1.2rem;
         color:#444748;
@@ -1782,4 +1783,113 @@ footer{
             font-size: clamp(1.2rem,calc(0.5rem + 2.5vw),1.6rem);
         }
     }
+}
+.login{
+    padding-block:clamp(3rem,calc(2rem + 5vw),8rem);
+    .container{
+        .loginHolder{
+            form{
+                input{
+                    color:#444748;
+                    font-size: 1.4rem;
+                    font-weight: 500;
+                    border:none;
+                    background-color: transparent;
+                    border-bottom: 1px solid #747878;
+                    padding-block:0.5rem;
+                }
+                .forgotPassword{
+                    align-self: end;
+                    color:#444748;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+
+                }
+            }
+            .singUpHolder{
+                width:100%;
+                border-top:1px solid #C4C7C8;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top:1.5rem;
+                .center{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap:1rem;
+                    a{
+                        padding-inline: 3.2rem;
+                        padding-block:1.2rem;
+                        border:1px solid #121212;
+                        font-size: 1.2rem;
+                        color:#1C1B1B;
+                        font-weight: 600;
+                        /* box-sizing: border-box; */
+                    }
+                }
+            }
+        }
+    }
+}
+.loginHolder,.forgotPasswordHolder,.signUpHolder{
+    width: min(40rem,90%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p{
+        font-size: 1.6rem;
+        color:#444748;
+        text-align: center;
+    }
+    h1{
+        font-family: "Hanken Grotesk",sans-serif;
+        font-size: clamp(2.4rem,calc(1rem + 4vw),3.2rem);
+        color:#1C1B1B;
+        font-weight: 400;
+        margin-bottom: 1rem;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        margin-block:4rem;
+        width: 100%;
+        gap:1.5rem;
+    }
+}
+.signUp{
+    padding-block:clamp(3rem,calc(2rem + 5vw),8rem);
+    .container{
+        .signUpHolder{
+            form{
+                gap: 2rem;
+                .name{
+                    display: flex;
+                    gap:1.5rem;
+                    @media(width<=450px){
+                        flex-direction: column;
+                    }
+                    >*{
+                        flex:1 1 0;
+                        /* max-width: 50%; */
+                    }
+                }
+            }
+            a{
+                color:#444748;
+                font-size: 1.4rem;
+                font-weight: 500;
+                text-align: center;
+                text-wrap: balance;
+            }
+        }
+    }
+}
+.submitBtn{
+    padding-block:1.6rem;
+    font-size: 1.3rem;
+    color:white;
+    font-weight: 500;
+    background-color: #121212;
+    letter-spacing: 2px;
 }

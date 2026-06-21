@@ -12,6 +12,8 @@ import SignOut from './pages/SignOut';
 import AccountSettings from './pages/AccountSettings';
 import SavedItems from './pages/SavedItems';
 import {GCProvider} from './contexts/globalC';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 function App() {
 
   return (
@@ -34,6 +36,10 @@ function App() {
                     </Route>
                     <Route path="shopping-bag" element={<ShoppingBag/>}/>
                     <Route path="checkout" element={<CheckOut/>}/>
+                    <Route path="auth">
+                        <Route path="login" element={<Login/>}/>
+                        <Route path="signUp" element={<SignUp/>}/>
+                    </Route>
                 </Routes>
                 <Footer/>
             </BrowserRouter>
