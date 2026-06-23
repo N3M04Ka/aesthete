@@ -11,16 +11,17 @@ import Orderhistory from './pages/OrderHistory';
 import SignOut from './pages/SignOut';
 import AccountSettings from './pages/AccountSettings';
 import SavedItems from './pages/SavedItems';
-import {GCProvider} from './contexts/globalC';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import { UISideEffects } from './components/UISideEffects';
 function App() {
 
   return (
     <>
-        <GCProvider>
-            <BrowserRouter>
-                <Header/>
+        <UISideEffects/>
+        <BrowserRouter>
+            <Header/>
+            <main>
                 <Routes>
                     <Route index element={<Home/>}/>
                     <Route path="collection">
@@ -41,9 +42,9 @@ function App() {
                         <Route path="signUp" element={<SignUp/>}/>
                     </Route>
                 </Routes>
-                <Footer/>
-            </BrowserRouter>
-        </GCProvider>
+            </main>
+            <Footer/>
+        </BrowserRouter>
     </>
   )
 }

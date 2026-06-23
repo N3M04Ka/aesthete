@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
-import {useGC} from '../contexts/useGC'
+import {useSelector,useDispatch} from 'react-redux';
+import {setSearchPanelIsShown} from '../app/slices/uiSlice'
+import type { RootState } from "../app/store";
 export default function SearchPanel() {
-    const {searchPanelIsShown,setSearchPanelIsShown}=useGC();
+    const dispatch=useDispatch();
+    const searchPanelIsShown=useSelector((state:RootState)=>state.ui.searchPanelIsShown)
     return (
         <>
             <div
@@ -46,7 +49,7 @@ export default function SearchPanel() {
                 </div>
                 <button
                     className="closeTag centered"
-                    onClick={() => setSearchPanelIsShown(false)}
+                    onClick={() => dispatch(setSearchPanelIsShown(false))}
                 >
                     <IoMdClose size={"3rem"} />
                 </button>

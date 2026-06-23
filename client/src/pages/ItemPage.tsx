@@ -27,42 +27,40 @@ export default function ItemPage() {
     const [selectedSize,setSelectedSize]=useState<SelectedSize>({id:-1,val:""});
     const [imageToDisplay,setImageToDisplay]=useState<number>(0);
     return (
-       <main>
-            <div className="itemDescriptionPage">
-                <div className="container">
-                    <section className="itemDescription">
-                        <div className="imagesContainer">
-                            <div className="otherImages">
-                                {otherImages.map((el,id)=><button key={id} onClick={()=>setImageToDisplay(id)}><img src={el} alt="another items image"/></button>)}
-                            </div>
-                            <img src={otherImages[imageToDisplay]} alt="items main image" className="mainImage" />
+       <section className="itemDescriptionPage">
+            <div className="container">
+                <section className="itemDescription">
+                    <div className="imagesContainer">
+                        <div className="otherImages">
+                            {otherImages.map((el,id)=><button key={id} onClick={()=>setImageToDisplay(id)}><img src={el} alt="another items image"/></button>)}
                         </div>
-                        <div className="description">
-                            <div className="topSection">
-                                <h1>{item.name}</h1>
-                                <span className="price">${item.price.toFixed(2)}</span>
-                                <p className="description">{item.description}</p>
-                                <div className="sizeSection">
-                                    <div className="top">
-                                        <span>SIZE</span>
-                                        <button><span>Sized Guide</span></button>
-                                    </div>
-                                    <div className="sizesContainer">
-                                        {item.availableSize.map((el,id)=><button key={id} onClick={()=>setSelectedSize({id,val:el})} className={selectedSize.id==id?'active':''}>{el}</button>)}
-                                    </div>
+                        <img src={otherImages[imageToDisplay]} alt="items main image" className="mainImage" />
+                    </div>
+                    <div className="description">
+                        <div className="topSection">
+                            <h1>{item.name}</h1>
+                            <span className="price">${item.price.toFixed(2)}</span>
+                            <p className="description">{item.description}</p>
+                            <div className="sizeSection">
+                                <div className="top">
+                                    <span>SIZE</span>
+                                    <button><span>Sized Guide</span></button>
                                 </div>
-                            </div>
-                            <div className="bottomSection">
-                                <button className="addToBagBtn"><span>Add to Bag</span><RiArrowRightLongLine size={"1.6rem"}/></button>
-                                <div className="detailsButtons">
-                                    <button className="first"><span>DETAILS & CARE</span><BiPlus size={"2.8rem"}/></button>
-                                    <button className="second"><span>SHIPPING & RETURNS</span><BiPlus size={"2.8rem"}/></button>
+                                <div className="sizesContainer">
+                                    {item.availableSize.map((el,id)=><button key={id} onClick={()=>setSelectedSize({id,val:el})} className={selectedSize.id==id?'active':''}>{el}</button>)}
                                 </div>
                             </div>
                         </div>
-                    </section>
-                </div>
+                        <div className="bottomSection">
+                            <button className="addToBagBtn"><span>Add to Bag</span><RiArrowRightLongLine size={"1.6rem"}/></button>
+                            <div className="detailsButtons">
+                                <button className="first"><span>DETAILS & CARE</span><BiPlus size={"2.8rem"}/></button>
+                                <button className="second"><span>SHIPPING & RETURNS</span><BiPlus size={"2.8rem"}/></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-       </main>
+        </section>
     );
 }

@@ -34,26 +34,24 @@ const items:Item[]=[
 
 export default function SavedItems() {
     return (
-        <main>
-            <div className="savedItems">
-                <div className="container">
-                    <SideBar/>
-                    <div className="mainContent">
-                        <h1>Saved Items</h1>
-                        <p>You have {items.length} {items.length==1?"item":"items"} saved.</p>
-                        <div className="items">
-                            {items.map((el,id)=>(
-                                <div className="item" key={id}>
-                                    <img src={el.img} alt="items image" />
-                                    <span className="name">{el.name}</span>
-                                    <span className="price">${el.price.toFixed(2)}</span>
-                                    <button>ADD TO BAG</button>
-                                </div>
-                            ))}
-                        </div>
+        <section className="savedItems">
+            <div className="container">
+                <SideBar/>
+                <div className="mainContent">
+                    <h1>Saved Items</h1>
+                    <p>You have {items.length} {items.length==1?"item":"items"} saved.</p>
+                    <div className="items">
+                        {items.map((el,id)=>(
+                            <div className="item" key={id}>
+                                <img src={el.img} alt="items image" />
+                                <span className="name">{el.name}</span>
+                                <span className="price">${el.price.toFixed(2)}</span>
+                                <button>ADD TO BAG</button>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
-        </main>
+        </section>
     );
 }

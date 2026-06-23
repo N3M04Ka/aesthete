@@ -66,36 +66,34 @@ function calculateTotal():number{
 }
 export default function ShoppingBag() {
     return (
-        <main>
-            <div className="shoppingBag">
-                <div className="container">
-                    <h1>Shopping Bag</h1>
-                    <p>{items.length==0?"There is no items in your shopping bag":(items.length+" item"+(items.length!=1?"s":""))}</p>
-                    <div className="content">
-                        <div className="items">
-                            {items.map((el,id)=>(
-                                <ItemContainer el={el} id={id} key={id}/>
-                            ))}
+        <section className="shoppingBag">
+            <div className="container">
+                <h1>Shopping Bag</h1>
+                <p>{items.length==0?"There is no items in your shopping bag":(items.length+" item"+(items.length!=1?"s":""))}</p>
+                <div className="content">
+                    <div className="items">
+                        {items.map((el,id)=>(
+                            <ItemContainer el={el} id={id} key={id}/>
+                        ))}
+                    </div>
+                    <div className="summary">
+                        <h2>Order Summary</h2>
+                        <div className="line">
+                            <span className="label">Subtotal</span>
+                            <span className="value">${calculateTotal().toFixed(2)}</span>
                         </div>
-                        <div className="summary">
-                            <h2>Order Summary</h2>
-                            <div className="line">
-                                <span className="label">Subtotal</span>
-                                <span className="value">${calculateTotal().toFixed(2)}</span>
-                            </div>
-                            <div className="line">
-                                <span>Shipping</span>
-                                <span>Calculated at checkout</span>
-                            </div>
-                            <div className="totalRes">
-                                <span>Total</span>
-                                <span>${calculateTotal().toFixed(2)}</span>
-                            </div>
-                            <Link to="checkout">Proceed to Chekout</Link>
+                        <div className="line">
+                            <span>Shipping</span>
+                            <span>Calculated at checkout</span>
                         </div>
+                        <div className="totalRes">
+                            <span>Total</span>
+                            <span>${calculateTotal().toFixed(2)}</span>
+                        </div>
+                        <Link to="checkout">Proceed to Chekout</Link>
                     </div>
                 </div>
             </div>
-        </main>
+        </section>
     );
 }

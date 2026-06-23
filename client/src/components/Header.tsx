@@ -1,20 +1,20 @@
 import { Link, NavLink } from "react-router-dom";
 import { GrSearch } from "react-icons/gr";
 import { FaRegUser } from "react-icons/fa";
-import { MdOutlineShoppingBag } from "react-icons/md";
 import { MdMenu } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
-import {useGC} from '../contexts/useGC'
+import { MdOutlineShoppingBag } from "react-icons/md";
 import SearchPanel from "./SearchPanel";
-// import { IoMdClose } from "react-icons/io";
-
+import {useSelector,useDispatch} from 'react-redux';
+import {type RootState} from '../app/store';
+import {setSearchPanelIsShown,setBurgerMenuIsShownUp} from '../app/slices/uiSlice';
 export default function Header() {
-
-    const {setSearchPanelIsShown,burgerMenuIsShownUp,setBurgerMenuIsShownUp}=useGC();
+    const dispatch=useDispatch();
+    const burgerMenuIsShownUp=useSelector((state:RootState)=>state.ui.burgerMenuIsShownUp);
     return (
         <>
             <header>
-                <div className="shadow" style={{zIndex:burgerMenuIsShownUp?1:-1}} onClick={()=>setBurgerMenuIsShownUp(false)}></div>
+                <div className="shadow" style={{zIndex:burgerMenuIsShownUp?1:-1}} onClick={()=>dispatch(setBurgerMenuIsShownUp(false))}></div>
                 <SearchPanel/>
                 <div className="container">
                     <nav className="headNav">
@@ -33,7 +33,7 @@ export default function Header() {
                     </Link>
                     <div className="actions">
                         <div className="action">
-                            <button className="searchButton" onClick={()=>setSearchPanelIsShown(true)}>
+                            <button className="searchButton" onClick={()=>dispatch(setSearchPanelIsShown(true))}>
                                 <GrSearch />
                             </button>
                         </div>
@@ -50,21 +50,21 @@ export default function Header() {
                                 <MdOutlineShoppingBag />
                             </Link>
                         </div>
-                        <button className="burgerMenuBtn" onClick={()=>setBurgerMenuIsShownUp(true)}><MdMenu/></button>
+                        <button className="burgerMenuBtn" onClick={()=>dispatch(setBurgerMenuIsShownUp(true))}><MdMenu/></button>
                     </div>
                     <div className="burgerMenu" style={{right:burgerMenuIsShownUp?0:'-320px'}}>
-                        <button className="closeBtn" onClick={()=>setBurgerMenuIsShownUp(false)}><IoMdClose/></button>
+                        <button className="closeBtn" onClick={()=>dispatch(setBurgerMenuIsShownUp(false))}><IoMdClose/></button>
                         <nav>
-                        <NavLink to="/new-arrivals" className="navLink">
-                            New Arrivals
-                        </NavLink>
-                        <NavLink to="/collection" className="navLink">
-                            Collections
-                        </NavLink>
-                        <NavLink to="/sale" className="navLink">
-                            Sales
-                        </NavLink>
-                    </nav>
+                            <NavLink to="/new-arrivals" className="navLink">
+                                New Arrivals
+                            </NavLink>
+                            <NavLink to="/collection" className="navLink">
+                                Collections
+                            </NavLink>
+                            <NavLink to="/sale" className="navLink">
+                                Sales
+                            </NavLink>
+                        </nav>
                     </div>
                 </div>
             </header>

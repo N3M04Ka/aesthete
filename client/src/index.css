@@ -32,7 +32,11 @@ select{
     }
 }
 body{
-    height: 100dvh;
+}
+#root{
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
 }
 html{
     font-size: 62.5%;
@@ -49,6 +53,7 @@ button{
 }
 main{
     background-color: #FCF9F8;
+    flex-grow: 1;
 }
 main>*{
     display: flex;
@@ -75,6 +80,9 @@ main>*{
     z-index: 5;
     background-color: #FCF9F8;
     justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* display: none; */
     /* background-color:red; */
     .closeTag{
@@ -89,9 +97,7 @@ main>*{
     .searchContainer{
         /* align-self: stretch; */
         /* flex-grow: 0; */
-        position: relative;
-        top:15%;
-        height: fit-content;
+        transform: translateY(-40%);
         width: min(80rem,95%);
         form{
             padding-block:1.2rem;
@@ -258,6 +264,15 @@ header{
     padding-block:5rem;
     /* padding-bottom: 8rem; */
     background-color: #FCF9F8;
+    display: flex;
+    flex-direction: column;
+    max-width: 1280px;
+    justify-self: center;
+    >*{
+        /* width:100%; */
+        display: flex;
+        justify-content: center;
+    }
     .heroSection{
             .container{
             display: flex;
@@ -268,6 +283,9 @@ header{
             max-width: 100%;
             position:relative;
             aspect-ratio: 128/74;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             >img{
                 /* position: absolute;
                 top:0;

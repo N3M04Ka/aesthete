@@ -39,42 +39,40 @@ const orders:Order[]=[
 
 export default function Orderhistory() {
     return (
-        <main>
-            <section className="orderHistory">
-                <div className="container">
-                    <SideBar/>
-                    <div className="content">
-                        <div className="top">
-                            <h1>Order History</h1>
-                            <span>{orders.length==0?"No orders found":`${orders.length} Order${orders.length>1?'s':''}`} Found</span>
-                        </div>
-                        <div className="orders">
-                            {orders.map((el,id)=>(
-                                <div className="order" key={id}>
-                                    <div className="header">
-                                        <div className="orderDetails">
-                                            <span className="orderNumber">Order #AD-{el.orderId}</span>
-                                            <span className="orderDate">{dateToString(el.date)}</span>
-                                        </div>
-                                        <div className="otherInfo">
-                                            <span className="status">{el.status}</span>
-                                            <span className={"price"+(el.status=="Returned"?" canceled":"")}>${el.price.toFixed(2)}</span>
-                                        </div>
+        <section className="orderHistory">
+            <div className="container">
+                <SideBar/>
+                <div className="content">
+                    <div className="top">
+                        <h1>Order History</h1>
+                        <span>{orders.length==0?"No orders found":`${orders.length} Order${orders.length>1?'s':''}`} Found</span>
+                    </div>
+                    <div className="orders">
+                        {orders.map((el,id)=>(
+                            <div className="order" key={id}>
+                                <div className="header">
+                                    <div className="orderDetails">
+                                        <span className="orderNumber">Order #AD-{el.orderId}</span>
+                                        <span className="orderDate">{dateToString(el.date)}</span>
                                     </div>
-                                    <div className="body">
-                                        <div className="imgs">
-                                            {el.imgs.map((el,id)=>(
-                                                <img src={el} key={id} alt="Images of items in this order" />
-                                            ))}
-                                        </div>
-                                        <button>View Details</button>
+                                    <div className="otherInfo">
+                                        <span className="status">{el.status}</span>
+                                        <span className={"price"+(el.status=="Returned"?" canceled":"")}>${el.price.toFixed(2)}</span>
                                     </div>
                                 </div>
-                            ))}
-                        </div>
+                                <div className="body">
+                                    <div className="imgs">
+                                        {el.imgs.map((el,id)=>(
+                                            <img src={el} key={id} alt="Images of items in this order" />
+                                        ))}
+                                    </div>
+                                    <button>View Details</button>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            </section>
-        </main>
+            </div>
+        </section>
     );
 }

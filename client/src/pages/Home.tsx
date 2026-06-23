@@ -3,7 +3,6 @@ import img1 from '../assets/images/cloth1.png'
 import img2 from '../assets/images/cloth2.png'
 import img3 from '../assets/images/cloth3.png'
 import img4 from '../assets/images/cloth4.png'
-import img5 from '../assets/images/image.png'
 import img6 from '../assets/images/Editorial Image.png'
 
 interface NewArrivalItem{
@@ -37,7 +36,7 @@ const arr:NewArrivalItem[]=[
 
 export default function Home() {
   return (
-    <main className="home">
+    <div className='home'>
         <section className="heroSection">
             <div className="container">
                 <div className="holder">
@@ -86,6 +85,6 @@ export default function Home() {
                 <img src={img6}/>
             </div>
         </section>
-    </main>
+    </div>
   );
 }
