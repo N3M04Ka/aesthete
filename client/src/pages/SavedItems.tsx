@@ -1,8 +1,8 @@
-import SideBar from "../components/SideBar";
-import img1 from '../assets/images/savedItems1.png'
-import img2 from '../assets/images/savedItems2.png'
-import img3 from '../assets/images/savedItems3.png'
-import img4 from '../assets/images/savedItems4.png'
+import SideBar from "@/components/SideBar";
+import img1 from '/images/savedItems1.png'
+import img2 from '/images/savedItems2.png'
+import img3 from '/images/savedItems3.png'
+import img4 from '/images/savedItems4.png'
 
 interface Item{
     img:string;

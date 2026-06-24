@@ -1,19 +1,19 @@
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
-import Home from './pages/Home'
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Collection from './pages/Collections';
-import ItemPage from './pages/ItemPage'
-import CheckOut from './pages/CheckOut'
-import AccountInfo from './pages/AccountInfo'
-import ShoppingBag from './pages/ShoppingBag';
-import Orderhistory from './pages/OrderHistory';
-import SignOut from './pages/SignOut';
-import AccountSettings from './pages/AccountSettings';
-import SavedItems from './pages/SavedItems';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
-import { UISideEffects } from './components/UISideEffects';
+import Home from '@/pages/Home'
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import Collection from '@/pages/Collections';
+import ItemPage from '@/pages/ItemPage'
+import CheckOut from '@/pages/CheckOut'
+import AccountInfo from '@/pages/AccountInfo'
+import ShoppingBag from '@/pages/ShoppingBag';
+import Orderhistory from '@/pages/OrderHistory';
+import SignOut from '@/pages/SignOut';
+import AccountSettings from '@/pages/AccountSettings';
+import SavedItems from '@/pages/SavedItems';
+import Login from '@/pages/Login';
+import SignUp from '@/pages/SignUp';
+import { UISideEffects } from '@/components/UISideEffects';
 function App() {
 
   return (

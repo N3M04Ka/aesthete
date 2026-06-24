@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import {useSelector,useDispatch} from 'react-redux';
-import {setSearchPanelIsShown} from '../app/slices/uiSlice'
-import type { RootState } from "../app/store";
+import {setSearchPanelIsShown} from '@/app/slices/uiSlice'
+import type { RootState } from "@/app/store";
 export default function SearchPanel() {
     const dispatch=useDispatch();
     const searchPanelIsShown=useSelector((state:RootState)=>state.ui.searchPanelIsShown)

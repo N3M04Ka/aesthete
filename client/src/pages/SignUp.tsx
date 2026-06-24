@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import NameInput from '../components/NameInput'
+import NameInput from '@/components/NameInput'
 
 export default function SignUp() {
     return (

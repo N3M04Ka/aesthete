@@ -4,10 +4,10 @@ import { FaRegUser } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { MdOutlineShoppingBag } from "react-icons/md";
-import SearchPanel from "./SearchPanel";
+import SearchPanel from "@/components/SearchPanel";
 import {useSelector,useDispatch} from 'react-redux';
-import {type RootState} from '../app/store';
-import {setSearchPanelIsShown,setBurgerMenuIsShownUp} from '../app/slices/uiSlice';
+import {type RootState} from '@/app/store';
+import {setSearchPanelIsShown,setBurgerMenuIsShownUp} from '@/app/slices/uiSlice';
 export default function Header() {
     const dispatch=useDispatch();
     const burgerMenuIsShownUp=useSelector((state:RootState)=>state.ui.burgerMenuIsShownUp);

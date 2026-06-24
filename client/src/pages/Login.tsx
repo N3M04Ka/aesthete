@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {Link} from 'react-router-dom'
-import NameInput from '../components/NameInput'
+import NameInput from '@/components/NameInput'
 
 export default function Login() {
     const [PasswordIsForgotten,setPasswordIsForgotten]=useState<boolean>(false);

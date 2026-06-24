@@ -1,12 +1,15 @@
-import mainImg from '../assets/images/product images/specific product images/Main Image.png'
-import img1 from '../assets/images/product images/specific product images/img1.png'
-import img2 from '../assets/images/product images/specific product images/img2.png'
-import img3 from '../assets/images/product images/specific product images/img3.png'
-import img4 from '../assets/images/product images/specific product images/img4.png'
-import {type CategoryFilterState as SelectedSize}  from '../types/categoryFilterState'
+import mainImg from '/images/product images/productImages/mainProductImage.jpg'
+import img1 from '/images/product images/productImages/productImage1.jpg'
+import img2 from '/images/product images/productImages/productImage2.jpg'
+import img3 from '/images/product images/productImages/productImage3.jpg'
+import img4 from '/images/product images/productImages/productImage4.jpg'
+import {type CategoryFilterState as SelectedSize}  from '@/types/categoryFilterState'
 import {useState} from 'react';
 import { RiArrowRightLongLine } from "react-icons/ri";
 import { BiPlus } from "react-icons/bi";
+import {useDispatch,useSelector} from 'react-redux';
+import {addItem,type CartItem} from '@/app/slices/cartSlice'
+import {useParams} from 'react-router-dom'
 
 interface ItemDescription{
     name:string,
@@ -26,6 +29,14 @@ const otherImages=[mainImg,img1,img2,img3,img4];
 export default function ItemPage() {
     const [selectedSize,setSelectedSize]=useState<SelectedSize>({id:-1,val:""});
     const [imageToDisplay,setImageToDisplay]=useState<number>(0);
+    const dispatch=useDispatch();
+    const id=useParams();
+    // console.log(id);
+    function addItem(){
+        const newItem:CartItem={
+
+        }
+    }
     return (
        <section className="itemDescriptionPage">
             <div className="container">
@@ -52,7 +63,7 @@ export default function ItemPage() {
                             </div>
                         </div>
                         <div className="bottomSection">
-                            <button className="addToBagBtn"><span>Add to Bag</span><RiArrowRightLongLine size={"1.6rem"}/></button>
+                            <button className="addToBagBtn" onClick={()=>addItem()}><span>Add to Bag</span><RiArrowRightLongLine size={"1.6rem"}/></button>
                             <div className="detailsButtons">
                                 <button className="first"><span>DETAILS & CARE</span><BiPlus size={"2.8rem"}/></button>
                                 <button className="second"><span>SHIPPING & RETURNS</span><BiPlus size={"2.8rem"}/></button>

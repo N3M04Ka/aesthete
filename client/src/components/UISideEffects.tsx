@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {useSelector,useDispatch} from 'react-redux';
-import {type RootState} from '../app/store';
-import {setBurgerMenuIsShownUp} from '../app/slices/uiSlice';
+import {type RootState} from '@/app/store';
+import {setBurgerMenuIsShownUp} from '@/app/slices/uiSlice';
 
 export function UISideEffects(){
     const dispatch=useDispatch();

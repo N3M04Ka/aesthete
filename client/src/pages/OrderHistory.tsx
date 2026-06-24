@@ -1,10 +1,9 @@
-import SideBar from "../components/SideBar";
-// import img1 from '../assets/images/or'
-import img1 from '../assets/images/orderHistory1.png'
-import img2 from '../assets/images/orderHistory2.png'
-import img3 from '../assets/images/orderHistory3.png'
-import img4 from '../assets/images/orderHistory4.png'
-import dateToString from '../functions/converteDateToString'
+import SideBar from "@/components/SideBar";
+import img1 from '/images/orderHistory1.png'
+import img2 from '/images/orderHistory2.png';
+import img3 from '/images/orderHistory3.png'
+import img4 from '/images/orderHistory4.png'
+import dateToString from '@/functions/converteDateToString'
 interface Order{
     orderId:number,
     date:Date,

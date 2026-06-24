@@ -1,5 +1,5 @@
-import NameInput from '../components/NameInput'
-import SideBar from '../components/SideBar'
+import NameInput from '@/components/NameInput'
+import SideBar from '@/components/SideBar'
 
 export default function AccountInfo() {
     return (

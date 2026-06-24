@@ -1,7 +1,7 @@
 import { MdLockOutline } from "react-icons/md"
-import img1 from '../assets/images/checkoutImg1.png'
-import img2 from '../assets/images/checkoutImg2.png'
-import NameInput from '../components/NameInput'
+import img1 from '/images/checkoutImg1.png'
+import img2 from '/images/checkoutImg2.png'
+import NameInput from '@/components/NameInput'
 interface Item{
     img:string,
     count:number,

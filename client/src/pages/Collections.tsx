@@ -1,17 +1,17 @@
-import img1 from "../assets/images/product images/turtleneck.png";
-import img2 from "../assets/images/product images/crewneck.png";
-import img3 from "../assets/images/product images/cardigan.png";
-import img4 from "../assets/images/product images/polo.png";
-import img5 from "../assets/images/product images/mockNeck.png";
-import img6 from "../assets/images/product images/cottonTee.png";
+import img1 from '/images/product images/turtleneck.png'
+import img2 from "/images/product images/crewneck.png";
+import img3 from "/images/product images/cardigan.png";
+import img4 from "/images/product images/polo.png";
+import img5 from "/images/product images/mockNeck.png";
+import img6 from "/images/product images/cottonTee.png";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { useState,useEffect} from "react";
-import { type CategoryFilterState } from "../types/categoryFilterState";
+import { type CategoryFilterState } from "@/types/categoryFilterState";
 import { Link } from "react-router-dom";
-import {setSmallScreen,setFilterIsOpen} from '../app/slices/uiSlice';
+import {setSmallScreen,setFilterIsOpen} from '@/app/slices/uiSlice';
 import {useDispatch,useSelector} from 'react-redux';
-import type { RootState } from "../app/store";
+import type { RootState } from "@/app/store";
 
 interface Item {
     img: string;

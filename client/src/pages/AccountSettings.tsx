@@ -1,4 +1,4 @@
-import SideBar from '../components/SideBar'
+import SideBar from '@/components/SideBar'
 import {useId} from 'react'
 import { IoMdCheckmark} from "react-icons/io";
 

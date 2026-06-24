@@ -1,9 +1,9 @@
-import img from '../assets/images/Gemini_Generated_Image_a61o3ca61o3ca61o.png'
-import img1 from '../assets/images/cloth1.png'
-import img2 from '../assets/images/cloth2.png'
-import img3 from '../assets/images/cloth3.png'
-import img4 from '../assets/images/cloth4.png'
-import img6 from '../assets/images/Editorial Image.png'
+import img from '/images/Gemini_Generated_Image_a61o3ca61o3ca61o.png'
+import img1 from '/images/cloth1.png'
+import img2 from '/images/cloth2.png'
+import img3 from '/images/cloth3.png'
+import img4 from '/images/cloth4.png'
+import img6 from '/images/Editorial Image.png'
 
 interface NewArrivalItem{
     image:string,

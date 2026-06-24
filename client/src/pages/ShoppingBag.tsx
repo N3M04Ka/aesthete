@@ -1,5 +1,5 @@
-import img1 from '../assets/images/shoppingBag1.png'
-import img2 from '../assets/images/shoppingBag2.png'
+import img1 from '/images/shoppingBag1.png'
+import img2 from '/images/shoppingBag2.png'
 import {Link} from 'react-router-dom'
 
 interface Item{
