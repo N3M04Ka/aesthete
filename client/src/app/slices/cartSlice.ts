@@ -5,14 +5,15 @@ export interface Size{
     quantity:number
 }
 export interface CartItem{
-    id:number,
+    id:string,
     name:string,
     description:string,
-    availableSizes:Size[],
+    size:string,
     mainImage:string,
     otherImages:string[],
     quantity:number,
     price:number
+    color:string,
 }
 
 interface CartState{
@@ -30,16 +31,20 @@ export const cartSlice=createSlice({
         addItem:(state,action:PayloadAction<CartItem>)=>{
             const existingItem=state.items.find(item=>item.id===action.payload.id);
             if(existingItem)
-                existingItem.quantity++;
+                existingItem.quantity+=action.payload.quantity;
             else
                 state.items.push(action.payload);
         },
-        removeItem:(state,action:PayloadAction<{id:number}>)=>{
-            state.items=state.items.filter(item=>item.id!=action.payload.id);
+        removeItem:(state,action:PayloadAction<string>)=>{
+            state.items=state.items.filter(item=>item.id!=action.payload);
+        },
+        changeItemQuantity:(state,action:PayloadAction<{id:string,newQuantity:number}>)=>{
+            const existingItem=state.items.find(item=>item.id==action.payload.id);
+            existingItem!.quantity=action.payload.newQuantity;
         }
     }
 })
 
-export const {addItem,removeItem} =cartSlice.actions;
+export const {addItem,removeItem,changeItemQuantity} =cartSlice.actions;
 
 export default cartSlice.reducer;

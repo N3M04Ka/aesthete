@@ -8,9 +8,11 @@ import SearchPanel from "@/components/SearchPanel";
 import {useSelector,useDispatch} from 'react-redux';
 import {type RootState} from '@/app/store';
 import {setSearchPanelIsShown,setBurgerMenuIsShownUp} from '@/app/slices/uiSlice';
+
 export default function Header() {
     const dispatch=useDispatch();
     const burgerMenuIsShownUp=useSelector((state:RootState)=>state.ui.burgerMenuIsShownUp);
+    const cartSize=useSelector((state:RootState)=>state.cart.items.length)
     return (
         <>
             <header>
@@ -49,6 +51,7 @@ export default function Header() {
                             >
                                 <MdOutlineShoppingBag />
                             </Link>
+                                {cartSize>0&&(<span className="cartSize">{cartSize}</span>)}
                         </div>
                         <button className="burgerMenuBtn" onClick={()=>dispatch(setBurgerMenuIsShownUp(true))}><MdMenu/></button>
                     </div>

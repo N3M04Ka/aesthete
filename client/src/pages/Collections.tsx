@@ -1,63 +1,12 @@
-import img1 from '/images/product images/turtleneck.png'
-import img2 from "/images/product images/crewneck.png";
-import img3 from "/images/product images/cardigan.png";
-import img4 from "/images/product images/polo.png";
-import img5 from "/images/product images/mockNeck.png";
-import img6 from "/images/product images/cottonTee.png";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { useState,useEffect} from "react";
 import { type CategoryFilterState } from "@/types/categoryFilterState";
-import { Link } from "react-router-dom";
 import {setSmallScreen,setFilterIsOpen} from '@/app/slices/uiSlice';
 import {useDispatch,useSelector} from 'react-redux';
 import type { RootState } from "@/app/store";
+import CollectionItem from '@/components/CollectionItem';
 
-interface Item {
-    img: string;
-    name: string;
-    price: number;
-    color: string;
-}
-
-const items: Item[] = [
-    {
-        img: img1,
-        name: "Merino Ribbed Turtleneck",
-        price: 245,
-        color: "Ivory",
-    },
-    {
-        img: img2,
-        name: "Cashmere Crewneck",
-        price: 320,
-        color: "Onyx",
-    },
-    {
-        img: img3,
-        name: "Oversized Alpaca Cardigan",
-        price: 410,
-        color: "Ash",
-    },
-    {
-        img: img4,
-        name: "Textured Knit Polo",
-        price: 195,
-        color: "Charcoal",
-    },
-    {
-        img: img5,
-        name: "Structured Mock Neck",
-        price: 210,
-        color: "Taupe",
-    },
-    {
-        img: img6,
-        name: "Heavyweight Cotton Tee",
-        price: 95,
-        color: "Noir",
-    },
-];
 const categories = [
     "Outerwear",
     "Knitwear",
@@ -87,6 +36,7 @@ export default function Collection() {
     const dispatch=useDispatch();
     const filterIsOpen=useSelector((state:RootState)=>state.ui.filterIsOpen);
     const smallScreen=useSelector((state:RootState)=>state.ui.smallScreen);
+    const itemsToDisplay=useSelector((state:RootState)=>state.storage);
     function proceedSorting(idx:number){
         setSortByMenuIsOpen(false);
         setSortOption(sortBy[idx]);
@@ -192,24 +142,8 @@ export default function Collection() {
                         </div>
                     </div>
                     <div className="productsHolder">
-                        {items.map((el, id) => (
-                            <Link className="item" key={id} to="1">
-                                <img src={el.img} alt="Item Image" />
-                                <div className="description">
-                                    <span className="itemName">
-                                            {el.name}
-                                        </span>
-                                    <div>
-                                        <span className="color">
-                                            {el.color}
-                                        </span>
-                                        <span className="price">
-                                        ${el.price}
-                                    </span>
-                                    </div>
-
-                                </div>
-                            </Link>
+                        {itemsToDisplay.map((el, id) => (
+                            <CollectionItem el={el} key={id}/>
                         ))}
                     </div>
                     <button className="loadMoreBtn">LOAD MORE</button>
