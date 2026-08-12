@@ -6,7 +6,8 @@ import {useDispatch,useSelector} from 'react-redux';
 import {addItem,type CartItem} from '@/app/slices/cartSlice'
 import {useParams} from 'react-router-dom'
 import type { RootState } from '@/app/store';
-
+import {addSnackbar} from '@/app/slices/SnackbarSlice'
+import { nanoid } from '@reduxjs/toolkit';
 export default function ItemPage() {
     const [selectedSize,setSelectedSize]=useState<SelectedSize>({id:-1,val:""});
     const [imageToDisplay,setImageToDisplay]=useState<number>(0);
@@ -92,7 +93,11 @@ export default function ItemPage() {
                                     <button onClick={addItem1}>Add to Bag</button>
                                 </div>
                             ):(
-                                <button className="addToBagBtn" onClick={()=>setAmountSelectIsActive(selectedSize.id!=-1)}><span>Add to Bag</span><RiArrowRightLongLine size={"1.6rem"}/></button>
+                                <button className="addToBagBtn" onClick={()=>{
+                                    setAmountSelectIsActive(selectedSize.id!=-1);
+                                    if(selectedSize.id==-1)
+                                        dispatch(addSnackbar({type:"error",message:"You need to select size", id:nanoid()}))
+                                }}><span>Add to Bag</span><RiArrowRightLongLine size={"1.6rem"}/></button>
                             )}
                             <div className="detailsButtons">
                                 <button className="first"><span>DETAILS & CARE</span><BiPlus size={"2.8rem"}/></button>

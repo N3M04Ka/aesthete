@@ -6,30 +6,10 @@ import { useEffect, useState } from 'react';
 
 interface props{
     el:CartItem,
-    id:number,
     startAmount:number,
 }
 
-// const items:Item[]=[
-//     {
-//         name:"Structured Wool Coat",
-//         color:"Noir",
-//         size:"M",
-//         pricePerUnit:450,
-//         count:1,
-//         img:img1,
-//     },
-//     {
-//         name:"Silk Blend Trouser",
-//         color:"Toupe",
-//         size:"L",
-//         pricePerUnit:285,
-//         count:1,
-//         img:img2,
-//     }
-// ]
-
-function ItemContainer({el,id,startAmount}:props){
+function ItemContainer({el,startAmount}:props){
     const [selectedAmount,setSelectedAmount]=useState<number>(startAmount);
     const dispatch=useDispatch();
     const proceedAmount=(newAmount:number)=>{
@@ -53,10 +33,9 @@ function ItemContainer({el,id,startAmount}:props){
                 <span className="size">Size: {el.size}</span>
                 <div className="buttons">
                     <div className="changeAmountContainer">
-                        <button onClick={()=>proceedAmount(selectedAmount+1)}>+</button>
-                        {/* <span className="centered">{selectedAmount}</span> */}
+                        <button onClick={()=>setSelectedAmount(p=>Math.min(100,p+1))}>+</button>
                         <input type="text" placeholder={selectedAmount.toString()} value={selectedAmount}  onChange={(el)=>proceedAmount(+el.target.value)}/>
-                        <button onClick={()=>proceedAmount(selectedAmount-1)}>-</button>
+                        <button onClick={()=>setSelectedAmount(p=>Math.max(1,p-1))}>-</button>
                     </div>
                     <button className="removeItem" onClick={()=>dispatch(removeItem(el.id))}>Remove</button>
                 </div>

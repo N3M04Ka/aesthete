@@ -1,11 +1,13 @@
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { useState,useEffect} from "react";
-import { type CategoryFilterState } from "@/types/categoryFilterState";
 import {setSmallScreen,setFilterIsOpen} from '@/app/slices/uiSlice';
 import {useDispatch,useSelector} from 'react-redux';
 import type { RootState } from "@/app/store";
 import CollectionItem from '@/components/CollectionItem';
+import type { StorageItem } from "@/app/slices/storageSlice";
+import {type CategoryFilterState} from '@/types/categoryFilterState'
+
 
 const categories = [
     "Outerwear",
@@ -16,8 +18,7 @@ const categories = [
 ];
 const sizes = ["XS", "S", "M", "L", "XL"];
 const buttonsColors = ["#000000", "#FFFFFF", "#E5E2E1", "#747878", "#1C1B1B"];
-const sortBy=["BEST SELLING","ALPH., Z-A","ALPH., A-Z","PRICE, DESC","PRICE, ASC","NEW FIRST","OLD FIRST"];
-// const sortRule=["best_selling_f","product_name desc","product_name asc","price desc","price asc","creation_date desc","creation_date asc"]
+const sortBy=["BEST SELLING","ALPH., A-Z","ALPH., Z-A","PRICE, DESC","PRICE, ASC","NEW FIRST","OLD FIRST"];
 export default function Collection() {
     const [categoryFilter, setCategoryFilter] = useState<CategoryFilterState>({
         id: -1,
@@ -36,18 +37,46 @@ export default function Collection() {
     const dispatch=useDispatch();
     const filterIsOpen=useSelector((state:RootState)=>state.ui.filterIsOpen);
     const smallScreen=useSelector((state:RootState)=>state.ui.smallScreen);
-    const itemsToDisplay=useSelector((state:RootState)=>state.storage);
+    const items=useSelector((state:RootState)=>state.storage);
+    const [itemsToDisplay,setItemsToDisplay]=useState<StorageItem[]>(items);
+    const [minPrice,setMinPrice]=useState<number>(0);
+    const [maxPrice,setMaxPrice]=useState<number>(10000);
     function proceedSorting(idx:number){
         setSortByMenuIsOpen(false);
         setSortOption(sortBy[idx]);
+        switch(idx){
+            case 0:
+                setItemsToDisplay([...items].sort((a,b)=>b.totalSales-a.totalSales))
+            break;
+            case 1:
+                setItemsToDisplay([...items].sort((a,b)=>a.name.localeCompare(b.name)))
+            break;
+            case 2:
+                setItemsToDisplay([...items].sort((a,b)=>b.name.localeCompare(a.name)))
+            break;
+            case 3:
+                setItemsToDisplay([...items].sort((a,b)=>b.price-a.price))
+            break;
+            case 4:
+                setItemsToDisplay([...items].sort((a,b)=>a.price-b.price))
+            break;
+            case 5:
+                setItemsToDisplay([...items].sort((a,b)=>b.launchDate.localeCompare(a.launchDate)))
+            break;
+            case 6:
+                setItemsToDisplay([...items].sort((a,b)=>a.launchDate.localeCompare(b.launchDate)));
+            break;
+        }
     }
     useEffect(() => {
+        dispatch(setSmallScreen(window.innerWidth<=985));
         function handleResize() {
             if(smallScreen){
                 if(window.innerWidth>985){
                     document.getElementsByClassName('filter')[0].classList.remove('open');
                     dispatch(setFilterIsOpen(false));
                     dispatch(setSmallScreen(false))
+                    console.log('b');
                 }
             }
             else{
@@ -59,7 +88,10 @@ export default function Collection() {
         }
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    }, [smallScreen,dispatch]);
+    const checkNumber=(val:number,def:number)=>{
+        return Number.isNaN(val)?def:val;
+    }
     return (
         <section className="collection">
             <div className="container">
@@ -119,6 +151,14 @@ export default function Collection() {
                                     }
                                 />
                             ))}
+                        </div>
+                    </div>
+                    <div className="filterSection price">
+                        <span className="sectionName">Price</span>
+                        <div>
+                            <input type="text" placeholder="Min" value={minPrice} onChange={(event)=>setMinPrice(checkNumber(+event.target.value,0))}/>
+                            <span>—</span>
+                            <input type="text" placeholder="Min" value={maxPrice} onChange={(event)=>setMaxPrice(checkNumber(+event.target.value,10000))}/>
                         </div>
                     </div>
                 </div>

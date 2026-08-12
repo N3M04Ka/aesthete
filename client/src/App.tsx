@@ -14,11 +14,14 @@ import SavedItems from '@/pages/SavedItems';
 import Login from '@/pages/Login';
 import SignUp from '@/pages/SignUp';
 import { UISideEffects } from '@/components/UISideEffects';
+import SnackbarHolder from '@/components/SnackbarHolder'
+import SnackBarHolder from './components/SnackbarHolder';
 function App() {
 
   return (
     <>
         <UISideEffects/>
+        <SnackBarHolder/>
         <BrowserRouter>
             <Header/>
             <main>
