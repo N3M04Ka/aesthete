@@ -154,7 +154,7 @@ export default function Collection() {
                         </div>
                     </div>
                     <div className="filterSection price">
-                        <span className="sectionName">Price</span>
+                        <span className="sectionName">PRICE</span>
                         <div>
                             <input type="text" placeholder="Min" value={minPrice} onChange={(event)=>setMinPrice(checkNumber(+event.target.value,0))}/>
                             <span>—</span>
@@ -182,8 +182,8 @@ export default function Collection() {
                         </div>
                     </div>
                     <div className="productsHolder">
-                        {itemsToDisplay.map((el, id) => (
-                            <CollectionItem el={el} key={id}/>
+                        {itemsToDisplay.map((el) => (
+                            <CollectionItem el={el} key={el.id}/>
                         ))}
                     </div>
                     <button className="loadMoreBtn">LOAD MORE</button>

@@ -12,7 +12,7 @@ export default function CollectionItem({ el }: props) {
     const allImages=[el.mainImage,...el.otherImages];
     const navigate=useNavigate();
     return (
-        <div className="item"  onClick={()=>navigate(el.id.toString())} onMouseEnter={()=>setMouseIsOver(true)} onMouseLeave={()=>{setMouseIsOver(false);setActiveImg(0)}}>
+        <div className="item" data-id={el.id} onClick={()=>navigate(el.id.toString())} onMouseEnter={()=>setMouseIsOver(true)} onMouseLeave={()=>{setMouseIsOver(false);setActiveImg(0)}}>
             <div className="imgHolder">
                 <img src={allImages[activeImg]} alt="Item Image" />
                 <div className="bottomBtns" style={{display:mouseIsOver?'flex':"none"}}>

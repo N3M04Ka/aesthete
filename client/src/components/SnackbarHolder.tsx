@@ -4,7 +4,7 @@ import { IoMdCheckmark, IoMdClose } from "react-icons/io";
 import {type IconType} from 'react-icons'
 import {useEffect} from 'react';
 import {useDispatch,useSelector} from 'react-redux'
-import {addSnackbar,removeSnackbar} from '@/app/slices/SnackbarSlice'
+import {removeSnackbar} from '@/app/slices/SnackbarSlice'
 import {type RootState} from '@/app/store'
 
 interface SnackbarT{
@@ -57,7 +57,6 @@ function Snackbar({type,message,id}:Snackbar) {
 }
 export default function SnackBarHolder(){
     const snackBarArray=useSelector((state:RootState)=>state.snackbar);
-    console.log(snackBarArray);
     return (
         <div className="snackbarHolder">
             {snackBarArray.map((el)=>

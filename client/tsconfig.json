@@ -5,10 +5,10 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "baseUrl": ".",
     "paths":{
-        "/images/*":["public/assets"],
-        "@/*":["src/*"]
-    }
-  }
+        "/images/*":["./public/assets"],
+        "@/*":["./src/*"]
+    },
+    "types":["cypress"]
+  },
 }

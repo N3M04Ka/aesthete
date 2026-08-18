@@ -4,6 +4,7 @@ import { FaRegUser } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { MdOutlineShoppingBag } from "react-icons/md";
+import { FiLogIn } from "react-icons/fi";
 import SearchPanel from "@/components/SearchPanel";
 import {useSelector,useDispatch} from 'react-redux';
 import {type RootState} from '@/app/store';
@@ -13,6 +14,7 @@ export default function Header() {
     const dispatch=useDispatch();
     const burgerMenuIsShownUp=useSelector((state:RootState)=>state.ui.burgerMenuIsShownUp);
     const cartSize=useSelector((state:RootState)=>state.cart.items.length)
+    const userIsLoggedIn=useSelector((state:RootState)=>state.auth.isAuthenticated);
     return (
         <>
             <header>
@@ -39,10 +41,18 @@ export default function Header() {
                                 <GrSearch />
                             </button>
                         </div>
+
                         <div className="action">
-                            <Link to="user/personal-info" className="userBtn">
-                                <FaRegUser />
-                            </Link>
+                            {userIsLoggedIn?(
+                                <Link to="user/personal-info" className="userBtn">
+                                    <FaRegUser />
+                                </Link>
+                            ):(
+                                <Link to="auth/login" className="loginBtn">
+                                    <FiLogIn/>
+                                </Link>
+                            )}
+
                         </div>
                         <div className="action">
                             <Link

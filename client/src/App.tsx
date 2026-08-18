@@ -14,42 +14,40 @@ import SavedItems from '@/pages/SavedItems';
 import Login from '@/pages/Login';
 import SignUp from '@/pages/SignUp';
 import { UISideEffects } from '@/components/UISideEffects';
-import SnackbarHolder from '@/components/SnackbarHolder'
 import SnackBarHolder from './components/SnackbarHolder';
 function App() {
-
-  return (
-    <>
-        <UISideEffects/>
-        <SnackBarHolder/>
-        <BrowserRouter>
-            <Header/>
-            <main>
-                <Routes>
-                    <Route index element={<Home/>}/>
-                    <Route path="collection">
-                        <Route index element={<Collection/>}/>
-                        <Route path=":id" element={<ItemPage/>}/>
-                    </Route>
-                    <Route path="user">
-                        <Route path="personal-info" element={<AccountInfo/>}/>
-                        <Route path="order-history" element={<Orderhistory/>}/>
-                        <Route path="sign-out" element={<SignOut/>}/>
-                        <Route path="account-settings" element={<AccountSettings/>}/>
-                        <Route path="saved-items" element={<SavedItems/>}/>
-                    </Route>
-                    <Route path="shopping-bag" element={<ShoppingBag/>}/>
-                    <Route path="checkout" element={<CheckOut/>}/>
-                    <Route path="auth">
-                        <Route path="login" element={<Login/>}/>
-                        <Route path="signUp" element={<SignUp/>}/>
-                    </Route>
-                </Routes>
-            </main>
-            <Footer/>
-        </BrowserRouter>
-    </>
-  )
+    return (
+        <>
+            <UISideEffects/>
+            <SnackBarHolder/>
+            <BrowserRouter>
+                <Header/>
+                <main>
+                    <Routes>
+                        <Route index element={<Home/>}/>
+                        <Route path="collection">
+                            <Route index element={<Collection/>}/>
+                            <Route path=":id" element={<ItemPage/>}/>
+                        </Route>
+                        <Route path="user">
+                            <Route path="personal-info" element={<AccountInfo/>}/>
+                            <Route path="order-history" element={<Orderhistory/>}/>
+                            <Route path="sign-out" element={<SignOut/>}/>
+                            <Route path="account-settings" element={<AccountSettings/>}/>
+                            <Route path="saved-items" element={<SavedItems/>}/>
+                        </Route>
+                        <Route path="shopping-bag" element={<ShoppingBag/>}/>
+                        <Route path="checkout" element={<CheckOut/>}/>
+                        <Route path="auth">
+                            <Route path="login" element={<Login/>}/>
+                            <Route path="signUp" element={<SignUp/>}/>
+                        </Route>
+                    </Routes>
+                </main>
+                <Footer/>
+            </BrowserRouter>
+        </>
+    )
 }
 
 export default App

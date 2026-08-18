@@ -1,19 +1,18 @@
-import { type PayloadAction, createSlice,nanoid } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { type Snackbar } from '@/components/SnackbarHolder';
 
 const initialState: Snackbar[] = [];
-
 export const snackBarSlice = createSlice({
     name: "snackbars",
     initialState,
     reducers: {
         addSnackbar: (state, action: PayloadAction<Snackbar>) => {
-            if(state.length>=10)
+            console.log('snackbar');
+            if(state.length>0&&state[state.length-1].message==action.payload.message)
                 return;
             state.push(action.payload);
         },
         removeSnackbar: (state, action: PayloadAction<string>) => {
-
             return state.filter((el) => el.id !== action.payload);
         }
     }
