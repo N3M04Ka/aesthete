@@ -10,6 +10,8 @@ import validateEmail from '@/functions/validateEmail';
 import validatePassword from '@/functions/validatePassword';
 import { logIn } from '@/app/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 export default function Login() {
     const [PasswordIsForgotten,setPasswordIsForgotten]=useState<boolean>(false);
     const [passwordIsHidden,setPasswordIsHidden]=useState<boolean>(true);
@@ -19,7 +21,7 @@ export default function Login() {
     const [emailIsInvalid,setEmailIsInvalid]=useState<boolean>(false);
     const [passwordIsInvalid,setPasswordIsInvalid]=useState<boolean>(false);
     const navigate=useNavigate();
-    function handleSubmit(e:React.SubmitEvent<HTMLFormElement>){
+    async function handleSubmit(e:React.SubmitEvent<HTMLFormElement>){
         e.preventDefault();
         const data=new FormData(e.currentTarget);
         let email=data.get('email');
@@ -29,21 +31,24 @@ export default function Login() {
         email=email.trimStart().trimEnd().toLowerCase();
         password=password.trimStart().trimEnd();
         if(!validateEmail(email)){
-            dispatch(addSnackbar({type:"info",message:"Invalid email",id:nanoid()}));
+            dispatch(addSnackbar({type:"error",message:"Invalid email",id:nanoid()}));
             setEmailIsInvalid(true);
             return;
         }
-        else{
-            setEmailIsInvalid(false);
-            const result=validatePassword(password);
-            setPasswordIsInvalid(!result.isOk);
-            if(!result.isOk)
-                dispatch(addSnackbar({type:"info",message:result.message!,id:nanoid()}));
-            else{
-                dispatch(logIn({user:{firstName:"Alexander",lastName:"Pierce",email,password,phone:"+123456789"}}));
-                navigate('/collection')
-            }
+        setEmailIsInvalid(false);
+        const result=validatePassword(password);
+        setPasswordIsInvalid(!result.isOk);
+        if(!result.isOk){
+            dispatch(addSnackbar({type:"error",message:result.message!,id:nanoid()}));
+            return;
         }
+        const requestData=(await axios.post<{isOk:boolean,data:any}>(`http://localhost:3500/auth/login/${email}-${password}`)).data;
+        if(!requestData.isOk){
+            dispatch(addSnackbar({type:"error",message:requestData.data,id:nanoid()}))
+            return;
+        }
+        dispatch(logIn({user:{firstName:requestData.data.first_name,lastName:requestData.data.last_name,email:requestData.data.email,phone:requestData.data.phone,password:requestData.data.password}}));
+        navigate('/collection')
     }
     return (
         <section className="login">
@@ -53,7 +58,7 @@ export default function Login() {
                         <h1>Forgot Password</h1>
                         <p>Enter your email address and we'll send you a link to reset your password.</p>
                         <form action="" noValidate>
-                            <NameInput label="EMAIL ADDRESS" placeholder="your@gmail.com"  isDisabled={false} type="email"/>
+                            <NameInput label="EMAIL ADDRESS" placeholder="your@gmail.com"  isDisabled={false} type="email" name="email"/>
                             <button type="submit" className="submitBtn">SEND RESET LINK</button>
                         </form>
                         <button onClick={()=>setPasswordIsForgotten(false)}>Back to Sign in</button>

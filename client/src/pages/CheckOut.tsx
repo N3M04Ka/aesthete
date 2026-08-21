@@ -45,7 +45,7 @@ export default function CheckOut() {
                     <h2>Checkout</h2>
                     <div className="contactContainer">
                         <h3>Contact</h3>
-                        <NameInput label="Email" placeholder="Enter your email address" isDisabled={false} type="string"/>
+                        <NameInput label="Email" placeholder="Enter your email address" isDisabled={false} type="string" name=""/>
                         {/* <input type="text" /> */}
                         <div className="checkBoxContainer">
                             <input type="checkbox" name="checkBox" id="checkBox" />
@@ -55,18 +55,18 @@ export default function CheckOut() {
                     <div className="shippingDelivery">
                         <h3>Shipping Delivery</h3>
                         <div className="fullName">
-                            <NameInput label="First Name" placeholder="" isDisabled={false} type="string"/>
-                            <NameInput label="Last Name" placeholder="" isDisabled={false} type="string"/>
+                            <NameInput label="First Name" placeholder="" isDisabled={false} type="string" name="firstName"/>
+                            <NameInput label="Last Name" placeholder="" isDisabled={false} type="string" name="lastName"/>
                         </div>
                         <div>
-                            <NameInput label="Address" placeholder="" isDisabled={false} type="string"/>
+                            <NameInput label="Address" placeholder="" isDisabled={false} type="string" name="address2"/>
                         </div>
                         <div>
-                            <NameInput label="Apartment, suit, etc. (optional)" placeholder="" isDisabled={false} type="string"/>
+                            <NameInput label="Apartment, suit, etc. (optional)" placeholder="" isDisabled={false} type="string" name="address2"/>
                         </div>
                         <div>
-                            <NameInput label="City" placeholder="" isDisabled={false} type="string"/>
-                            <NameInput label="Postal Code" placeholder="" isDisabled={false} type="string"/>
+                            <NameInput label="City" placeholder="" isDisabled={false} type="string" name="city"/>
+                            <NameInput label="Postal Code" placeholder="" isDisabled={false} type="string" name="postalCode"/>
                         </div>
                         <select name="countrySelect" id="countrySelect">
                             <option value="United Stated">United Stated</option>
@@ -79,12 +79,12 @@ export default function CheckOut() {
                         <h3>Payment</h3>
                         <span>All transactions are secure and encrypted.</span>
                         <div className="cardDetails">
-                            <NameInput label="Card Number" placeholder="0000 0000 0000 0000" isDisabled={false} type="string"/>
+                            <NameInput label="Card Number" placeholder="0000 0000 0000 0000" isDisabled={false} type="string" name="cardNumber"/>
                             <div className="cardSpecificDetails">
-                                <NameInput label="Expiration Date (MM/YY)" placeholder="MM/YY" isDisabled={false} type="string"/>
-                                <NameInput label="Security Code" placeholder="CVC" isDisabled={false} type="string"/>
+                                <NameInput label="Expiration Date (MM/YY)" placeholder="MM/YY" isDisabled={false} type="string" name="cardExp"/>
+                                <NameInput label="Security Code" placeholder="CVC" isDisabled={false} type="string" name="cardCode"/>
                             </div>
-                            <NameInput label="Name on Card" placeholder="" isDisabled={false} type="string"/>
+                            <NameInput label="Name on Card" placeholder="" isDisabled={false} type="string" name="cardName"/>
                         </div>
                     </div>
                     <div className="payButton">

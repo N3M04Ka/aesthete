@@ -20,9 +20,9 @@ export default function AccountInfo() {
                                 <span>BASIC DETAILS</span>
                                 <button>Edit</button>
                             </div>
-                            <NameInput label="Name" placeholder={`${userData!.firstName} ${userData!.lastName}`} isDisabled={true} type="string"/>
-                            <NameInput label="Email" placeholder={`${userData!.email}`} isDisabled={true} type="string"/>
-                            <NameInput label="Phone" placeholder={`${userData!.phone}`} isDisabled={true} type="string"/>
+                            <NameInput label="Name" placeholder={`${userData!.firstName} ${userData!.lastName}`} isDisabled={true} type="string" name="name"/>
+                            <NameInput label="Email" placeholder={`${userData!.email}`} isDisabled={true} type="string" name="email"/>
+                            <NameInput label="Phone" placeholder={`${userData!.phone}`} isDisabled={true} type="string" name="phone"/>
                         </div>
                         <div className="card">
                             <div className="top">
@@ -39,7 +39,7 @@ export default function AccountInfo() {
                     </div>
                     <div className="card bottom">
                         <div className="left">
-                            <NameInput label="PASSWORD" placeholder={'•'.repeat(userData!.password.length)} isDisabled={true} type="password"/>
+                            <NameInput label="PASSWORD" placeholder={'•'.repeat(userData!.password.length)} isDisabled={true} type="password" name="password"/>
                             <span>Last updated 3 months ago</span>
                         </div>
                         <button onClick={()=>navigate('/user/account-settings',{replace:true})}>Change Password</button>

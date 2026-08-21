@@ -7,7 +7,6 @@ export const snackBarSlice = createSlice({
     initialState,
     reducers: {
         addSnackbar: (state, action: PayloadAction<Snackbar>) => {
-            console.log('snackbar');
             if(state.length>0&&state[state.length-1].message==action.payload.message)
                 return;
             state.push(action.payload);
