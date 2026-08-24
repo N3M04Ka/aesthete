@@ -5,8 +5,9 @@ interface props {
     isDisabled: boolean;
     type:string;
     name:string;
+    dataTest?:string;
 }
-export default function NameInput({ label, placeholder, isDisabled,type,name}: props) {
+export default function NameInput({ label, placeholder, isDisabled,type,name,dataTest}: props) {
     const inputId = useId();
     return (
         <div className="nameInput">
@@ -17,6 +18,7 @@ export default function NameInput({ label, placeholder, isDisabled,type,name}: p
                 id={inputId}
                 placeholder={placeholder}
                 disabled={isDisabled}
+                data-test={dataTest}
             />
         </div>
     );

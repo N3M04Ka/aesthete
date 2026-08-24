@@ -4,9 +4,9 @@ interface Response{
 }
 export default function validatePassword(password:string):Response{
     if(password.length<8)
-        return {isOk:false,message:"Password is to short"};
+        return {isOk:false,message:"Password is too short"};
     if(password.length>64)
-         return {isOk:false,message:"Password is to long"};
+         return {isOk:false,message:"Password is too long"};
     let digits=0,letters=0;
     for(let c of password){
         if(c>='0'&&c<='9')

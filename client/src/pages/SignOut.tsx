@@ -18,7 +18,7 @@ export default function SignOut() {
                     <p>Are you sure you want to sign out of your AESTHETE account?</p>
                     <div className="buttons">
                         <button onClick={handeleLogOut}>SIGN OUT</button>
-                        <button onClick={()=>{navigate('/collection')}}>STAY SIGNED IN</button>
+                        <button onClick={()=>{navigate('/')}}>STAY SIGNED IN</button>
                     </div>
                 </div>
             </div>

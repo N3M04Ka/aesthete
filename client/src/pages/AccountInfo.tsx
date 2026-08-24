@@ -39,7 +39,7 @@ export default function AccountInfo() {
                     </div>
                     <div className="card bottom">
                         <div className="left">
-                            <NameInput label="PASSWORD" placeholder={'•'.repeat(userData!.password.length)} isDisabled={true} type="password" name="password"/>
+                            <NameInput label="PASSWORD" placeholder={'•'.repeat(userData!.passwordLength)} isDisabled={true} type="password" name="password"/>
                             <span>Last updated 3 months ago</span>
                         </div>
                         <button onClick={()=>navigate('/user/account-settings',{replace:true})}>Change Password</button>

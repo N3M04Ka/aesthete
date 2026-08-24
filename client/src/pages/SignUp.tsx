@@ -24,7 +24,6 @@ export default function SignUp() {
         const phone=data.get("phone") as string ;
         const password1=data.get("password1") as string ;
         const password2=data.get("password2") as string ;
-        let isOk=true;
         try{
             if(!validateName(firstName)||!validateName(lastName)){
                 dispatch(addSnackbar({type:"error",message:"Invalid name",id:nanoid()}))
@@ -60,10 +59,12 @@ export default function SignUp() {
             console.log(result.data);
             if(!result.data.isOk){
                 dispatch(addSnackbar({type:"error",message:result.data.message,id:nanoid()}))
-                return;
+            }
+            else{
+                navigate('/collection')
+                dispatch(logIn({user:{userId:result.data.userId,firstName,lastName,phone,email,passwordLength:password1.length}}))
             }
         }catch(err){
-            isOk=false;
             if(isAxiosError(err)){
                 if(err.response){
                     console.error(err.response.data.data);
@@ -76,11 +77,6 @@ export default function SignUp() {
                 console.error(err.message);
             else
                 console.log(err);
-        }finally{
-            if(isOk){
-                navigate('/collection')
-                dispatch(logIn({user:{firstName,lastName,phone,email,password:password1}}))
-            }
         }
     }
     return (
@@ -91,13 +87,13 @@ export default function SignUp() {
                     <p> Join AESTHETE for a curated experience.</p>
                     <form action="" onSubmit={submitHandler}>
                         <div className="name">
-                            <NameInput placeholder="First Name" label="FIRST NAME" isDisabled={false} type="text" name="firstName"/>
-                            <NameInput placeholder="Last Name" label="LAST NAME" isDisabled={false} type="text" name="lastName"/>
+                            <NameInput dataTest="firstName" placeholder="First Name" label="FIRST NAME" isDisabled={false} type="text" name="firstName"/>
+                            <NameInput dataTest="lastName" placeholder="Last Name" label="LAST NAME" isDisabled={false} type="text" name="lastName"/>
                         </div>
-                        <NameInput placeholder="Email Address" label="EMAIL ADDRESS" isDisabled={false} type="email" name="email"/>
-                        <NameInput placeholder="Phone" label="PHONE" isDisabled={false} type="text" name="phone"/>
-                        <NameInput placeholder="Password" label="PASSWORD" isDisabled={false} type="password" name="password1"/>
-                        <NameInput placeholder="Confirm Password" label="CONFIRM PASSWORD" isDisabled={false} type="password" name="password2"/>
+                        <NameInput dataTest="email" placeholder="Email Address" label="EMAIL ADDRESS" isDisabled={false} type="email" name="email"/>
+                        <NameInput dataTest="phone" placeholder="Phone" label="PHONE" isDisabled={false} type="text" name="phone"/>
+                        <NameInput dataTest="password1" placeholder="Password" label="PASSWORD" isDisabled={false} type="password" name="password1"/>
+                        <NameInput dataTest="password2" placeholder="Confirm Password" label="CONFIRM PASSWORD" isDisabled={false} type="password" name="password2"/>
                         <button type="submit" className="submitBtn">CREATE ACCOUNT</button>
                     </form>
                     <Link to="/auth/login">ALREADY HAVE AN ACCOUNT? SIGN IN</Link>

@@ -1,4 +1,6 @@
 export default function validateName(name:string):boolean{
+    if(name.length==0)
+        return false;
     const allowedChars=["'","-"," ","."];
     fn:
     for(let char of name){

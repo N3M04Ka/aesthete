@@ -12,9 +12,16 @@ export default function validateEmail(email:string):boolean{
             return false;
     const domain=email.substring(email.indexOf('@')+1,email.lastIndexOf('.'));
     const localPart=email.substring(0,email.indexOf('@'));
-    for(let char of localPart)
-        if((char<'a'||char>'z')&&char!='.'&&char!='+'&&char!='_')
+    const chars=['!' ,'#' ,'$' ,'%' ,'&' ,"'" ,'*' ,'+' ,'-' ,'/' ,'=' ,'?' ,'^' ,'_' ,'`' ,'.' ,'{' ,'|' ,'}' ,'~'];
+    fn:
+    for(let char of localPart){
+        if((char>='A'&&char<='Z')||(char>='a'||char<='z')||(char>='0'&&char<='9'))
+            continue;
+        for(let allowedChar of chars)
+            if(char==allowedChar)
+                continue fn;
             return false;
+    }
     if(localPart.length>64||email.length>254||domain.length>63||domain.length==0||domain.charAt(0)=='.')
         return false;
     let countOfChars=0;

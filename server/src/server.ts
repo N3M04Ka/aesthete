@@ -5,6 +5,8 @@ import dotenv from 'dotenv'
 import {router as root} from './routes/root.js'
 import {router as authentification} from './routes/auth.js'
 import {router as signUp} from './routes/signUp.js'
+import {router as changePassword} from './routes/changePassword.js'
+import {router as deleteAccount} from './routes/deleteAccount.js'
 import cors from 'cors';
 
 const port=3500;
@@ -26,7 +28,11 @@ app.use(express.urlencoded({extended:true}));
 
 app.use('/auth/signUp',signUp);
 
-app.use('/auth/login/:email-:password',authentification);
+app.use('/auth/login',authentification);
+
+app.use('/auth/changePassword',changePassword);
+
+app.use('/auth/delete-account',deleteAccount)
 
 app.use((req,res)=>{
     res.status(404).send("Sorry can't find that");

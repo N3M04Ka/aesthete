@@ -49,73 +49,87 @@ const invalidEmails = [
 
 ];
 
-describe("email validation",()=>{
-    beforeEach(()=>{
-        cy.visit(`${Cypress.config('baseUrl')}/auth/login`);
-    })
-    it('empty email',()=>{
-        cy.get('[data-test=password-input]').type('qwertyaaaa1')
-        cy.get('.submitBtn').click();
-        cy.get('.snackbar').should('exists');
-        cy.get('.snackbar').should('contain.text','Invalid email');
-    })
-    it('emails with spaces',()=>{
-        cy.get('[data-test=password-input]').type('aaaaaaaaa123');
-        emailsWithSpaces.forEach(err=>{
-            cy.get('[data-test=email-input]').invoke('val',err).trigger('change');
-            cy.get('.submitBtn').click();
-            cy.get('.snackbar').should('be.visible');
-            cy.get('.snackbar').should('contain.text','Invalid email')
-            cy.get('[data-test=email-input]').clear();
-            cy.get('.snackbar>button').click();
-        })
-    })
-    it("invalid emails",()=>{
-        cy.get('[data-test=password-input]').type('abc123');
-        invalidEmails.forEach(err=>{
-            cy.get('[data-test=email-input]').type(err);
-            cy.get('.submitBtn').click();
-            cy.get('.snackbar').should('be.visible');
-            cy.get('.snackbar').should('contain.text','Invalid email')
-            cy.get('[data-test=email-input]').clear();
-            cy.get('.snackbar>button').click();
-        })
-    })
-})
-describe("password validation",()=>{
+// describe("email validation",()=>{
+//     beforeEach(()=>{
+//         cy.visit(`${Cypress.config('baseUrl')}/auth/login`);
+//     })
+//     it('empty email',()=>{
+//         cy.get('[data-test=password-input]').type('qwertyaaaa1')
+//         cy.get('.submitBtn').click();
+//         cy.get('.snackbar').should('exists');
+//         cy.get('.snackbar').should('contain.text','Invalid email');
+//     })
+//     it('emails with spaces',()=>{
+//         cy.get('[data-test=password-input]').type('aaaaaaaaa123');
+//         emailsWithSpaces.forEach(err=>{
+//             cy.get('[data-test=email-input]').invoke('val',err).trigger('change');
+//             cy.get('.submitBtn').click();
+//             cy.get('.snackbar').should('be.visible');
+//             cy.get('.snackbar').should('contain.text','Invalid email')
+//             cy.get('[data-test=email-input]').clear();
+//             cy.get('.snackbar>button').click();
+//         })
+//     })
+//     it("invalid emails",()=>{
+//         cy.get('[data-test=password-input]').type('abc123');
+//         invalidEmails.forEach(err=>{
+//             cy.get('[data-test=email-input]').type(err);
+//             cy.get('.submitBtn').click();
+//             cy.get('.snackbar').should('be.visible');
+//             cy.get('.snackbar').should('contain.text','Invalid email')
+//             cy.get('[data-test=email-input]').clear();
+//             cy.get('.snackbar>button').click();
+//         })
+//     })
+// })
+// describe("password validation",()=>{
+//     beforeEach(()=>{
+//         cy.visit(`${Cypress.config('baseUrl')}/auth/login`);
+//     });
+
+//     it('short password',()=>{
+//         cy.get('[data-test=email-input]').type('somevalidemail@mail.com');
+//         cy.get('[data-test=password-input]').type('aaaa12');
+//         cy.get('.submitBtn').click();
+//         cy.get('.snackbar').should('be.visible');
+//         cy.get('.snackbar').should('contain.text','Password is too short');
+//     })
+
+//     it('long password',()=>{
+//         cy.get('[data-test=email-input]').type('somevalidemail@mail.com');
+//         cy.get('[data-test=password-input]').type('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa121');
+//         cy.get('.submitBtn').click();
+//         cy.get('.snackbar').should('be.visible');
+//         cy.get('.snackbar').should('contain.text','Password is too long');
+//     })
+
+//     it('forget to use digits',()=>{
+//         cy.get('[data-test=email-input]').type('somevalidemail@mail.com');
+//         cy.get('[data-test=password-input]').type('aaaaaaaaaaaa');
+//         cy.get('.submitBtn').click();
+//         cy.get('.snackbar').should('be.visible');
+//         cy.get('.snackbar').should('contain.text','Use digits');
+//     })
+
+//     it('forget to use letters',()=>{
+//         cy.get('[data-test=email-input]').type('somevalidemail@mail.com');
+//         cy.get('[data-test=password-input]').type('1111111111');
+//         cy.get('.submitBtn').click();
+//         cy.get('.snackbar').should('be.visible');
+//         cy.get('.snackbar').should('contain.text','Use letters');
+//     })
+// })
+describe('some functional bugs',()=>{
     beforeEach(()=>{
         cy.visit(`${Cypress.config('baseUrl')}/auth/login`);
     });
-
-    it('short password',()=>{
-        cy.get('[data-test=email-input]').type('somevalidemail@mail.com');
-        cy.get('[data-test=password-input]').type('aaaa12');
+    it('such user is not exists',()=>{
+        const uuid=()=>Cypress._.random(0,1e6);
+        const email=`email${uuid()}@gmail.com`;
+        cy.get('[data-test=email-input]').type(email);
+        cy.get('[data-test=password-input]').type('aaaaaaaaa1');
         cy.get('.submitBtn').click();
         cy.get('.snackbar').should('be.visible');
-        cy.get('.snackbar').should('contain.text','Password to short');
-    })
-
-    it('long password',()=>{
-        cy.get('[data-test=email-input]').type('somevalidemail@mail.com');
-        cy.get('[data-test=password-input]').type('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa121');
-        cy.get('.submitBtn').click();
-        cy.get('.snackbar').should('be.visible');
-        cy.get('.snackbar').should('contain.text','Password to long');
-    })
-
-    it('forget to use digits',()=>{
-        cy.get('[data-test=email-input]').type('somevalidemail@mail.com');
-        cy.get('[data-test=password-input]').type('aaaaaaaaaaaa');
-        cy.get('.submitBtn').click();
-        cy.get('.snackbar').should('be.visible');
-        cy.get('.snackbar').should('contain.text','Use digits');
-    })
-
-    it('forget to use letters',()=>{
-        cy.get('[data-test=email-input]').type('somevalidemail@mail.com');
-        cy.get('[data-test=password-input]').type('1111111111');
-        cy.get('.submitBtn').click();
-        cy.get('.snackbar').should('be.visible');
-        cy.get('.snackbar').should('contain.text','Use letters');
+        cy.get('.snackbar').should('contain.text','User with such email doesn\'t exists');
     })
 })

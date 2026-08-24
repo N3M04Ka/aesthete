@@ -10,8 +10,14 @@ import validateEmail from '@/functions/validateEmail';
 import validatePassword from '@/functions/validatePassword';
 import { logIn } from '@/app/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios,{isAxiosError} from 'axios';
 
+interface ResponseType{
+    user_id:number,
+    phone:string,
+    firstName:string,
+    lastName:string
+}
 export default function Login() {
     const [PasswordIsForgotten,setPasswordIsForgotten]=useState<boolean>(false);
     const [passwordIsHidden,setPasswordIsHidden]=useState<boolean>(true);
@@ -42,13 +48,29 @@ export default function Login() {
             dispatch(addSnackbar({type:"error",message:result.message!,id:nanoid()}));
             return;
         }
-        const requestData=(await axios.post<{isOk:boolean,data:any}>(`http://localhost:3500/auth/login/${email}-${password}`)).data;
-        if(!requestData.isOk){
-            dispatch(addSnackbar({type:"error",message:requestData.data,id:nanoid()}))
-            return;
+        let requestData;
+        try{
+            requestData=(await axios.post<ResponseType>(`http://localhost:3500/auth/login`,{
+                email,
+                password
+            })).data;
+            const {user_id:userId,firstName,lastName,phone}=requestData;
+            dispatch(logIn({user:{userId,firstName,lastName,email,phone,passwordLength:password.length}}));
+            navigate('/collection');
         }
-        dispatch(logIn({user:{firstName:requestData.data.first_name,lastName:requestData.data.last_name,email:requestData.data.email,phone:requestData.data.phone,password:requestData.data.password}}));
-        navigate('/collection')
+        catch(err){
+            if(isAxiosError(err)){
+                if(err.request!=null){
+                    dispatch(addSnackbar({type:"error",message:(JSON.parse(err.request.response)).message,id:nanoid()}))
+                }
+                else if(err.response!=null)
+                    console.log(err.response.data);
+            }
+            else if(err instanceof Error)
+                console.log(err.stack);
+            else
+                console.log(err);
+        }
     }
     return (
         <section className="login">
