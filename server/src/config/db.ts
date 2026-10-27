@@ -10,3 +10,14 @@ export const pool=new Pool({
     port:Number(process.env.DB_PORT)||5432,
     database:process.env.DB_NAME,
 })
+
+export interface UserRow{
+    user_id:number,
+    first_name:string,
+    last_name:string,
+    email:string,
+    phone:string,
+    password:string,
+    refresh_token:string,
+    role:string,
+}

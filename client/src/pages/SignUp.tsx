@@ -9,9 +9,18 @@ import { addSnackbar } from '@/app/slices/SnackbarSlice';
 import axios,{isAxiosError} from 'axios';
 import { nanoid } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
-import { logIn } from '@/app/slices/authSlice';
+import { setCredentials } from '@/app/slices/authSlice';
+
 const apiUrl=import.meta.env.VITE_API_URL;
 
+type ResponseType={
+    userId:number,
+    firstName:string,
+    lastName:string,
+    email:string,
+    phone:string,
+    accessToken:string
+}
 export default function SignUp() {
     const dispatch=useDispatch();
     const navigate=useNavigate();
@@ -49,21 +58,24 @@ export default function SignUp() {
                 dispatch(addSnackbar({type:"error",message:"Invalid password",id:nanoid()}));
                 return;
             }
-            const result=await axios.post(`${apiUrl}/auth/signUp`,{
+            const result=await axios.post<ResponseType>(`${apiUrl}/auth/signUp`,{
                 firstName,
                 lastName,
                 email,
-                password:password1,
                 phone,
+                password:password1
             });
             console.log(result.data);
-            if(!result.data.isOk){
-                dispatch(addSnackbar({type:"error",message:result.data.message,id:nanoid()}))
-            }
-            else{
-                navigate('/collection')
-                dispatch(logIn({user:{userId:result.data.userId,firstName,lastName,phone,email,passwordLength:password1.length}}))
-            }
+            // if(!result.data.isOk){
+            //     dispatch(addSnackbar({type:"error",message:result.data.message,id:nanoid()}))
+            // }
+            // else{
+            //     navigate('/collection')
+            //     dispatch(setCredentials({user:{userId:result.data.userId,firstName,lastName,phone,email},accessToken:result.accessToken}))
+            // }
+            const {userId,accessToken}=result.data;
+            navigate('/collection')
+            dispatch(setCredentials({user:{userId,firstName,lastName,phone,email},accessToken}))
         }catch(err){
             if(isAxiosError(err)){
                 if(err.response){

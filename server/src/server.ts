@@ -7,8 +7,9 @@ import {router as authentification} from './routes/auth.js'
 import {router as signUp} from './routes/signUp.js'
 import {router as changePassword} from './routes/changePassword.js'
 import {router as deleteAccount} from './routes/deleteAccount.js'
+import {router as refresh} from './routes/refresh.js'
 import cors from 'cors';
-
+import cookieParser from 'cookie-parser';
 const port=3500;
 const app=express();
 const __dirname=path.dirname(fileURLToPath(import.meta.url));
@@ -17,6 +18,8 @@ app.use(cors({
     origin:['http://localhost:5173'],
     credentials:true,
 }))
+
+app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname,"..","..","client","public")));
 
@@ -33,6 +36,8 @@ app.use('/auth/login',authentification);
 app.use('/auth/changePassword',changePassword);
 
 app.use('/auth/delete-account',deleteAccount)
+
+app.use('/auth/refresh',refresh);
 
 app.use((req,res)=>{
     res.status(404).send("Sorry can't find that");

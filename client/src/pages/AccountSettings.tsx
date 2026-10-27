@@ -10,7 +10,6 @@ import validatePassword from '@/functions/validatePassword';
 import { useDispatch } from 'react-redux';
 import axios,{isAxiosError} from 'axios';
 const apiUrl=import.meta.env.VITE_API_URL;
-import { changePassword } from '@/app/slices/authSlice';
 import { logOut } from '@/app/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 
@@ -65,9 +64,8 @@ export default function AccountSettings() {
                 userId,
                 newPassword:firstNewPassword,
                 oldPassword:currentPassword
-            })
+            },{withCredentials:true})
             dispatch(addSnackbar({type:"success",message:"Password has been updated",id:nanoid()}));
-            dispatch(changePassword({newPasswordLength:firstNewPassword.length}));
         }
         catch(err){
             if(isAxiosError(err)){

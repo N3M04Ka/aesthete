@@ -3,6 +3,7 @@ import {createSlice,type PayloadAction} from '@reduxjs/toolkit'
 interface AuthState{
     isAuthenticated:boolean;
     user:UserData|null;
+    accessToken:string|null;
 }
 interface UserData{
     userId:number,
@@ -10,36 +11,33 @@ interface UserData{
     lastName:string;
     email:string;
     phone:string;
-    passwordLength:number;
 }
 
-const savedUserData=localStorage.getItem('userData');
 const initialState:AuthState={
-    isAuthenticated:savedUserData!=null&&savedUserData!='undefined',
-    user:savedUserData!=null&&savedUserData!='undefined'?JSON.parse(savedUserData):null,
+    isAuthenticated:false,
+    user:null,
+    accessToken:null,
 }
 
 const authSlice=createSlice({
     name:'auth',
     initialState,
     reducers:{
-        logIn:(state,action:PayloadAction<{user:UserData}>)=>{
-            console.log(action.payload.user);
+        setCredentials:(state,action:PayloadAction<{user:UserData,accessToken:string}>)=>{
             state.user=action.payload.user;
             state.isAuthenticated=true;
-            localStorage.setItem('userData',JSON.stringify(action.payload.user));
+            state.accessToken=action.payload.accessToken
+            localStorage.setItem('hasSession','true');
         },
         logOut:(state)=>{
             state.isAuthenticated=false;
             state.user=null;
-            localStorage.removeItem('userData');
-        },
-        changePassword:(state,action:PayloadAction<{newPasswordLength:number}>)=>{
-            state.user!.passwordLength=action.payload.newPasswordLength;
-            localStorage.setItem('userData',JSON.stringify(state.user));
+            state.accessToken=null;
+            localStorage.setItem('hasSession','false');
+            console.log('logged out in authSlice');
         }
     }
 })
 
-export const {logIn,logOut,changePassword} =authSlice.actions;
+export const {setCredentials,logOut} =authSlice.actions;
 export default authSlice.reducer;

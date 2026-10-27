@@ -8,15 +8,17 @@ import { addSnackbar } from '@/app/slices/SnackbarSlice';
 import { nanoid } from '@reduxjs/toolkit';
 import validateEmail from '@/functions/validateEmail';
 import validatePassword from '@/functions/validatePassword';
-import { logIn } from '@/app/slices/authSlice';
+import { setCredentials } from '@/app/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import axios,{isAxiosError} from 'axios';
+const apiUrl=import.meta.env.VITE_API_URL;
 
 interface ResponseType{
     user_id:number,
     phone:string,
     firstName:string,
-    lastName:string
+    lastName:string,
+    accessToken:string,
 }
 export default function Login() {
     const [PasswordIsForgotten,setPasswordIsForgotten]=useState<boolean>(false);
@@ -50,12 +52,12 @@ export default function Login() {
         }
         let requestData;
         try{
-            requestData=(await axios.post<ResponseType>(`http://localhost:3500/auth/login`,{
+            requestData=(await axios.post<ResponseType>(`${apiUrl}/auth/login`,{
                 email,
                 password
-            })).data;
-            const {user_id:userId,firstName,lastName,phone}=requestData;
-            dispatch(logIn({user:{userId,firstName,lastName,email,phone,passwordLength:password.length}}));
+            },{withCredentials:true})).data;
+            const {user_id:userId,firstName,lastName,phone,accessToken}=requestData;
+            dispatch(setCredentials({user:{userId,firstName,lastName,email,phone},accessToken}));
             navigate('/collection');
         }
         catch(err){
@@ -95,7 +97,7 @@ export default function Login() {
                                 <input data-test="password-input" type={passwordIsHidden?'password':'text'} name="password" id="" placeholder="PASSWORD" required value={userPassword} onChange={event=>setUserPassword(event.target.value)} style={{backgroundColor:passwordIsInvalid?'#ff7f7f40':'transparent'}}/>
                                 <button className="hidePassword" type="button" onClick={()=>setPasswordIsHidden(p=>!p)}>{passwordIsHidden?<TbEye/>:<TbEyeClosed/>}</button>
                             </div>
-                            <button className="forgotPassword" onClick={()=> setPasswordIsForgotten(true)}>FORGOT PASSWORD?</button>
+                            <button type="button" className="forgotPassword" onClick={()=> setPasswordIsForgotten(true)}>FORGOT PASSWORD?</button>
                             <button type="submit" className="submitBtn">SIGN IN</button>
                         </form>
                         <div className="singUpHolder">

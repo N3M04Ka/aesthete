@@ -15,7 +15,43 @@ import Login from '@/pages/Login';
 import SignUp from '@/pages/SignUp';
 import { UISideEffects } from '@/components/UISideEffects';
 import SnackBarHolder from './components/SnackbarHolder';
+import {useEffect,useState} from 'react';
+import {useDispatch,useSelector} from 'react-redux';
+import axios,{isAxiosError} from 'axios';
+import { logOut, setCredentials } from './app/slices/authSlice';
+const apiUrl=import.meta.env.VITE_API_URL;
+
 function App() {
+    const dispatch=useDispatch();
+    const [isChekingAuth,setIsCheckingAuth]=useState(true);
+    useEffect(()=>{
+        const verifySession=async ()=>{
+            try{
+                const response = await axios.post(`${apiUrl}/auth/refresh`,{},{withCredentials:true});
+                console.log('er');
+                dispatch(setCredentials({user:response.data.user,accessToken:response.data.accessToken}));
+            }catch(err){
+                if(isAxiosError(err)){
+                    if(err.response)
+                        console.log(err.response?.data);
+                    else
+                        console.log(err.request.rep);
+                }
+                else{
+                    if(err instanceof Error)
+                        console.error(err.message);
+                    else
+                        console.log(err);
+                }
+                console.log('loggedOut')
+                dispatch(logOut());
+            }finally{
+                setIsCheckingAuth(false)
+            }
+        }
+        if(localStorage.getItem('hasSession'))
+            verifySession();
+    },[dispatch])
     return (
         <>
             <UISideEffects/>
